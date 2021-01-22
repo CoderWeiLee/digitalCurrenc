@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="230" id="WwE-BN-02G" userLabel="addminecell" customClass="addminecell">
+            <rect key="frame" x="0.0" y="0.0" width="422" height="230"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WwE-BN-02G" id="3gV-Tt-LMP">
+                <rect key="frame" x="0.0" y="0.0" width="422" height="230"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-nl-5fO">
+                        <rect key="frame" x="10.5" y="3" width="401" height="224"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LmV-UZ-tO8">
+                                <rect key="frame" x="10" y="15" width="3" height="15"/>
+                                <color key="backgroundColor" red="0.90196078431372551" green="0.57647058823529407" blue="0.14117647058823529" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="6XQ-iJ-Cqb"/>
+                                    <constraint firstAttribute="width" constant="3" id="S26-Lw-b8Q"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的邀请" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVr-uA-ltd">
+                                <rect key="frame" x="18" y="14" width="57.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hZL-3i-xuj">
+                                <rect key="frame" x="10" y="41" width="381" height="173"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vBa-ZH-XQX">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONH-pz-SHe">
+                                <rect key="frame" x="329" y="9" width="62" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="绑定推荐码">
+                                    <color key="titleColor" red="0.9297360778" green="0.44990807770000002" blue="0.18026816840000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="bindMa:" destination="WwE-BN-02G" eventType="touchUpInside" id="zcg-mB-2Yu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ONH-pz-SHe" firstAttribute="centerY" secondItem="AVr-uA-ltd" secondAttribute="centerY" id="0AP-I4-aBt"/>
+                            <constraint firstAttribute="bottom" secondItem="hZL-3i-xuj" secondAttribute="bottom" constant="10" id="3IY-Af-QW8"/>
+                            <constraint firstItem="ONH-pz-SHe" firstAttribute="trailing" secondItem="hZL-3i-xuj" secondAttribute="trailing" id="8du-at-YhS"/>
+                            <constraint firstItem="hZL-3i-xuj" firstAttribute="centerX" secondItem="7n4-nl-5fO" secondAttribute="centerX" id="b8v-aH-ohw"/>
+                            <constraint firstItem="LmV-UZ-tO8" firstAttribute="leading" secondItem="7n4-nl-5fO" secondAttribute="leading" constant="10" id="ibg-zj-bAj"/>
+                            <constraint firstItem="AVr-uA-ltd" firstAttribute="centerY" secondItem="LmV-UZ-tO8" secondAttribute="centerY" id="lnK-BJ-h4a"/>
+                            <constraint firstItem="hZL-3i-xuj" firstAttribute="leading" secondItem="LmV-UZ-tO8" secondAttribute="leading" id="mZH-xs-yVr"/>
+                            <constraint firstItem="LmV-UZ-tO8" firstAttribute="top" secondItem="7n4-nl-5fO" secondAttribute="top" constant="15" id="nKg-fr-caF"/>
+                            <constraint firstItem="hZL-3i-xuj" firstAttribute="top" secondItem="AVr-uA-ltd" secondAttribute="bottom" constant="10" id="oM9-f9-jzR"/>
+                            <constraint firstItem="AVr-uA-ltd" firstAttribute="leading" secondItem="LmV-UZ-tO8" secondAttribute="trailing" constant="5" id="v7o-Zk-O8O"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="7n4-nl-5fO" firstAttribute="centerX" secondItem="3gV-Tt-LMP" secondAttribute="centerX" id="J3h-jH-qhG"/>
+                    <constraint firstItem="7n4-nl-5fO" firstAttribute="width" secondItem="3gV-Tt-LMP" secondAttribute="width" multiplier="0.95" id="OWn-Vz-B80"/>
+                    <constraint firstAttribute="bottom" secondItem="7n4-nl-5fO" secondAttribute="bottom" constant="3" id="hOr-wS-Cli"/>
+                    <constraint firstItem="7n4-nl-5fO" firstAttribute="top" secondItem="3gV-Tt-LMP" secondAttribute="top" constant="3" id="w4y-Sh-jcj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="backview" destination="7n4-nl-5fO" id="0Et-XZ-aZg"/>
+                <outlet property="bindMa" destination="ONH-pz-SHe" id="yds-86-qbh"/>
+                <outlet property="collectionview" destination="hZL-3i-xuj" id="tmM-In-NhU"/>
+                <outlet property="titlelabel" destination="AVr-uA-ltd" id="sjz-No-QWE"/>
+            </connections>
+            <point key="canvasLocation" x="76" y="145"/>
+        </tableViewCell>
+    </objects>
+</document>

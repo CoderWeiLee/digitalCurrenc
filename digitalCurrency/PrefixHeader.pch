@@ -1,0 +1,102 @@
+//
+//  PrefixHeader.pch
+//  digitalCurrency
+//
+//  Created by sunliang on 2019/1/26.
+//  Copyright © 2019年 ABC. All rights reserved.
+//
+
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "Constant.h"
+#import "localizationDefine.h"
+#import <MJExtension/MJExtension.h>
+#import <MJRefresh/MJRefresh.h>
+#import "UIViewController+navStyle.h"
+#import "ChangeLanguage.h"
+#import "NSUserDefaultUtil.h"
+#import "NSString+LCJudgeNumber.h"
+#import <Toast/UIView+Toast.h>
+#import "EasyShowOptions.h"
+#import "EasyShowView.h"
+#import "ToolUtil.h"
+#import "LoginViewController.h"
+#import "YLUserInfo.h"
+#import "BaseViewController.h"
+#import <AFNetworking/AFNetworking.h>
+//#import "VTMagic.h"
+#import "LYEmptyView.h"
+#import "UIScrollView+Empty.h"
+#import "ShowLoGinVC.h"
+#import "MD5.h"
+#import "keychianTool.h"
+#import "SocketManager.h"
+#import "ChatSocketManager.h"
+#import "SocketUtils.h"
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
+#import "SDAutoLayout.h"
+#import "NSArray+Log.h"
+#import "NSDictionary+Log.h"
+#import "Masonry.h"
+#import "LEEAlert.h"
+#import "UINavigationController+Transition.h"
+#import "UIViewController+Layout.h"
+#import "XBRequest.h"
+#import "YBImageBrowser.h"
+#import "RKNotificationHub.h"
+#import "YLNavigationController.h"
+#import "UIImage+QTBackgroundColor.h"
+
+#define AES_KEY  @"A-16-Byte-String"
+
+
+#define blackcolor [UIColor colorWithRed:14/255.0 green:19/255.0 blue:33/255.0 alpha:1.0]
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+
+//iphoneX
+#define IS_IPHONE_X (ScreenHeight >= 812.0f) ? YES : NO
+#define Height_NavContentBar 44.0f
+#define Height_StatusBar ((IS_IPHONE_X==YES)?44.0f: 20.0f)
+#define Height_NavBar ((IS_IPHONE_X==YES)?88.0f: 64.0f)
+#define Height_TabBar ((IS_IPHONE_X==YES)?83.0f: 49.0f)
+#define OverAllLeft_OR_RightSpace  15.0f  //整体左右间距
+
+
+//字体
+#define tFont(x) [UIFont systemFontOfSize:x]
+
+#define MainColor [UIColor colorWithRed:31/255.0 green:130/255.0 blue:251/255.0 alpha:1]
+#define SkidBackgrouondColor rgba(13, 28, 56, 1);
+#define MainCellColor [UIColor colorWithRed:12.0/255.0 green:27.0/255.0 blue:57.0/255.0 alpha:1]
+#define xianColor rgba(27, 40, 60, 1)
+#define navBarColor rgba(12, 27, 57, 1)
+#define grayTextColor rgba(84, 101, 102, 1)
+#define KWhiteColor [UIColor whiteColor]
+#define KBlackColor  [UIColor blackColor]
+#define klineTypeSwitchBtnNormalTextColor rgba(121, 139, 166, 1)
+#define klineTypeSwitchBtnSelectedTextColor MainColor
+#define ContractDarkBlueColor [UIColor grayColor]
+#define ButtonDisabledColor  rgba(238, 243, 248, 1)
+#define MainBlueColor MainColor
+#define KGrayBacColor rgba(239, 242, 247, 1)
+#define FlowerFirexianColor rgba(248, 248, 248, 1)
+#define FlowerFireBorderColor rgba(241, 242, 243, 1)
+#define qutesRedColor  rgba(210, 91, 93, 1) //rgba(218, 106, 119, 1)
+#define qutesGreenColor rgba(92, 202, 104, 1)
+#define qutesDefaultColor rgba(62, 84, 107, 1)
+
+#define BASE_URL @"https://c1.nextisknow.com"
+#define BASE_MALL_URLL @"http://www.ysgf.vip"
+
+#define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+#define rgba(R,G,B,A)  [UIColor colorWithRed:(R * 1.0) / 255.0 green:(G * 1.0) / 255.0 blue:(B * 1.0) / 255.0 alpha:A]
+#define RGB(r,g,b) rgba(r, g, b, 1)
+
+
+#endif /* PrefixHeader_pch */
