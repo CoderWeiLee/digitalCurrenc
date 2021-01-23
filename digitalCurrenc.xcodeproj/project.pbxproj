@@ -578,6 +578,9 @@
 		D0F2072025BAC4F50032B17D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2071F25BAC4F50032B17D /* UIColor+Hex.m */; };
 		D0F2072425BAD4250032B17D /* LWRewardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2072325BAD4250032B17D /* LWRewardTableViewCell.m */; };
 		D0F2072825BAD4DA0032B17D /* LWCirculateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2072725BAD4DA0032B17D /* LWCirculateTableViewCell.m */; };
+		D0F2073A25BBFE100032B17D /* LWLockTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2073925BBFE100032B17D /* LWLockTableViewCell.m */; };
+		D0F2073E25BC0EA40032B17D /* LWEnergyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2073D25BC0EA40032B17D /* LWEnergyTableViewCell.m */; };
+		D0F2074225BC363B0032B17D /* LWEnergyBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1550,6 +1553,12 @@
 		D0F2072325BAD4250032B17D /* LWRewardTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWRewardTableViewCell.m; sourceTree = "<group>"; };
 		D0F2072625BAD4DA0032B17D /* LWCirculateTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWCirculateTableViewCell.h; sourceTree = "<group>"; };
 		D0F2072725BAD4DA0032B17D /* LWCirculateTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWCirculateTableViewCell.m; sourceTree = "<group>"; };
+		D0F2073825BBFE100032B17D /* LWLockTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWLockTableViewCell.h; sourceTree = "<group>"; };
+		D0F2073925BBFE100032B17D /* LWLockTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWLockTableViewCell.m; sourceTree = "<group>"; };
+		D0F2073C25BC0EA40032B17D /* LWEnergyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWEnergyTableViewCell.h; sourceTree = "<group>"; };
+		D0F2073D25BC0EA40032B17D /* LWEnergyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWEnergyTableViewCell.m; sourceTree = "<group>"; };
+		D0F2074025BC363B0032B17D /* LWEnergyBottomTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWEnergyBottomTableViewCell.h; sourceTree = "<group>"; };
+		D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWEnergyBottomTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3590,6 +3599,12 @@
 				D0F2072725BAD4DA0032B17D /* LWCirculateTableViewCell.m */,
 				D0F2072225BAD4250032B17D /* LWRewardTableViewCell.h */,
 				D0F2072325BAD4250032B17D /* LWRewardTableViewCell.m */,
+				D0F2073825BBFE100032B17D /* LWLockTableViewCell.h */,
+				D0F2073925BBFE100032B17D /* LWLockTableViewCell.m */,
+				D0F2073C25BC0EA40032B17D /* LWEnergyTableViewCell.h */,
+				D0F2073D25BC0EA40032B17D /* LWEnergyTableViewCell.m */,
+				D0F2074025BC363B0032B17D /* LWEnergyBottomTableViewCell.h */,
+				D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3988,6 +4003,7 @@
 				9241BBBE25469DA700FF2FFB /* AppDelegate.m in Sources */,
 				9241BC6725469DA800FF2FFB /* MyEntrustDetail1TableViewCell.m in Sources */,
 				3A7948B8258F11DF00595623 /* RegisteredSetPwdViewController.m in Sources */,
+				D0F2073A25BBFE100032B17D /* LWLockTableViewCell.m in Sources */,
 				9241BC8225469DA800FF2FFB /* TradeFeeReturnModel.m in Sources */,
 				9241BBD725469DA700FF2FFB /* MyBillDetailInfoModel.m in Sources */,
 				9241BD0925469DA800FF2FFB /* marketCell.m in Sources */,
@@ -4039,6 +4055,7 @@
 				9241BBA125469DA700FF2FFB /* ShowLoGinVC.m in Sources */,
 				9241BB9125469DA700FF2FFB /* LYEmptyView.m in Sources */,
 				7DB5676E25A46A7B0083DD24 /* DCConstant.swift in Sources */,
+				D0F2074225BC363B0032B17D /* LWEnergyBottomTableViewCell.m in Sources */,
 				9241BBB325469DA700FF2FFB /* CustomButton.m in Sources */,
 				9241BB8C25469DA700FF2FFB /* EasyShowAlertView.m in Sources */,
 				3A794920258F135400595623 /* BaseTableViewCell.m in Sources */,
@@ -4192,6 +4209,7 @@
 				9241BC7225469DA800FF2FFB /* Section1TableViewCell.m in Sources */,
 				9241BB7925469DA700FF2FFB /* Y_KLineVolumePositionModel.m in Sources */,
 				9241BCF525469DA800FF2FFB /* TradeViewController.m in Sources */,
+				D0F2073E25BC0EA40032B17D /* LWEnergyTableViewCell.m in Sources */,
 				9241BB7025469DA700FF2FFB /* Y_KLineView.m in Sources */,
 				9241BC4625469DA700FF2FFB /* SettingCenterViewController.m in Sources */,
 				9241BD0325469DA800FF2FFB /* marketManager.m in Sources */,
