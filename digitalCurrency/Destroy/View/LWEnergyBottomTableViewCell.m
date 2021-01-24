@@ -34,7 +34,47 @@
             make.bottom.mas_equalTo(self.contentView).offset(-10);
         }];
         
+        self.ownTitleLabel = [[UILabel alloc] init];
+        self.ownTitleLabel.text = @"持有能量";
+        self.ownTitleLabel.font = [UIFont systemFontOfSize:11];
+        self.ownTitleLabel.textColor = [UIColor colorWithHexString:@"#848484"];
+        [self.containerView addSubview:self.ownTitleLabel];
+        [self.ownTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.containerView).offset(11);
+            make.top.mas_equalTo(self.containerView).offset(14);
+        }];
+        [self.contentView addSubview:self.ownTitleLabel];
         
+        self.ownAmountLabel = [[UILabel alloc] init];
+        self.ownAmountLabel.text = @"";
+        self.ownAmountLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.ownAmountLabel.textColor = [UIColor whiteColor];
+        [self.containerView addSubview:self.ownAmountLabel];
+        [self.ownAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.ownTitleLabel);
+            make.top.mas_equalTo(self.ownTitleLabel.mas_bottom).offset(8);
+        }];
+        
+        self.myTitleLabel = [[UILabel alloc] init];
+        self.myTitleLabel.text = @"我的能量";
+        self.myTitleLabel.font = [UIFont systemFontOfSize:11];
+        self.myTitleLabel.textColor = [UIColor colorWithHexString:@"#848484"];
+        [self.containerView addSubview:self.myTitleLabel];
+        [self.myTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(self.containerView).offset(-11.5);
+            make.centerY.mas_equalTo(self.ownTitleLabel);
+        }];
+        [self.contentView addSubview:self.myTitleLabel];
+        
+        self.myAmountLabel = [[UILabel alloc] init];
+        self.myAmountLabel.text = @"";
+        self.myAmountLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.myAmountLabel.textColor = [UIColor whiteColor];
+        [self.containerView addSubview:self.myAmountLabel];
+        [self.myAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.ownAmountLabel);
+            make.top.mas_equalTo(self.myTitleLabel.mas_bottom).offset(8);
+        }];
     }
     return self;
 }
