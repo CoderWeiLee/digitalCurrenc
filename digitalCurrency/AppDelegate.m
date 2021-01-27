@@ -26,6 +26,7 @@
 #import <CoreTelephony/CTCellularData.h>
 #import <WebKit/WebKit.h>
 #import <Bugly/Bugly.h>
+#import "UIColor+Hex.h"
 @interface AppDelegate ()<chatSocketDelegate,UNUserNotificationCenterDelegate>
 {
     NSString*_deviceToken;
@@ -56,7 +57,7 @@
     [[ChatSocketManager share] connect];//连接聊天socket
 
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
     //引导页
 //    KSGuaidManager.images = @[[UIImage imageNamed:@"guid01"],
 //                              [UIImage imageNamed:@"guid02"],

@@ -31,8 +31,11 @@
 
 #import "MineNetManager.h"
 #import <objc/runtime.h>
+#import "UIColor+Hex.h"
 
 #define Handicap 5  //买入卖出显示数量
+#define PlaceholderColor [UIColor colorWithWhite:0.5 alpha:1]
+#define TextColor [UIColor colorWithWhite:0.9 alpha:1]
 @interface TradeViewController ()<UITextFieldDelegate,SocketDelegate,StepSliderDelegate,UIScrollViewDelegate>
 {
     BOOL _IsMarketprice;//按市价交易;
@@ -122,11 +125,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
+    [self.typeBtn setTitleColor:PlaceholderColor forState:UIControlStateNormal];
+    self.TradeNumber.textColor = PlaceholderColor;
     self.Myscrollview.delegate = self;
+    self.Myscrollview.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
     self.Myscrollview.showsVerticalScrollIndicator = NO;
     self.Myscrollview.showsHorizontalScrollIndicator = NO;
-    
+    self.mainview.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
+    self.titleview.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
+    self.entrusttableView.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#0E1321"];
     [self.PriceTF setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0 * kWindowWHOne]];
     [self.PriceTF addTarget:self action:@selector(textfieldValueChange:) forControlEvents:UIControlEventEditingChanged];
     self.PriceTF.tag = 1;
@@ -192,7 +201,7 @@
     self.slider.sliderCircleImage = [UIImage imageNamed:@"circularGreen"];
     [self.slider setMaxCount:5];
     [self.slider setIndex:0 animated:NO];
-    self.slider.backgroundColor = mainColor;
+    self.slider.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
     self.mainview.clipsToBounds = YES;
     //现价的手势设置
     UITapGestureRecognizer *tapRecognizerNowPrice=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nowPriceTapClick)];
@@ -327,7 +336,9 @@
 -(void)setTablewViewHeard{
     [self.asktableView registerNib:[UINib nibWithNibName:@"tradeCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     self.asktableView.tableFooterView=[UIView new];
+    self.asktableView.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
     [self.bidtableView registerNib:[UINib nibWithNibName:@"tradeCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    self.bidtableView.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
     self.bidtableView.tableFooterView=[UIView new];
     [self.entrusttableView registerNib:[UINib nibWithNibName:@"EntrustCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     [self.entrusttableView  registerNib:[UINib nibWithNibName:@"MyEntrustTableViewCell" bundle:nil] forCellReuseIdentifier:NSStringFromClass([MyEntrustTableViewCell class])];
@@ -399,9 +410,10 @@
     else{
         [self.typeBtn setTitle:LocalizationKey(@"limitPrice") forState:UIControlStateNormal];
     }
-    
-    self.PriceTF.placeholder=LocalizationKey(@"enterPrice");
-    self.AmountTF.placeholder=LocalizationKey(@"commissionamount");
+    NSString *pricePlaceholder = LocalizationKey(@"enterPrice");
+    self.PriceTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:pricePlaceholder attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
+    NSString *amountPlaceholder = LocalizationKey(@"commissionamount");
+    self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:amountPlaceholder attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
     self.Useable.text=[NSString stringWithFormat:@"%@--",LocalizationKey(@"usabel")];
     self.TradeNumber.text=[NSString stringWithFormat:@"%@ %@%@",LocalizationKey(@"entrustment"),[ToolUtil stringFromNumber:[self.PriceTF.text doubleValue]*[self.AmountTF.text doubleValue] withlimit:_baseCoinScale],_baseCoinName];
     [self.TradeBtn setTitle:LocalizationKey(@"Buy")forState:UIControlStateNormal];
@@ -465,6 +477,7 @@
 {
     if ([tableView isEqual:self.asktableView]) {
         tradeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backview.backgroundColor = kRGBColor(241, 80, 87);
         cell.backview.alpha = 0.1;
@@ -501,6 +514,7 @@
     }
     else if ([tableView isEqual:self.bidtableView]){
         tradeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.backview.backgroundColor = kRGBColor(42, 178, 116);
         cell.backview.alpha = 0.1;
@@ -536,6 +550,7 @@
     else{
         if (self.isHistory) {
             MyEntrustTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([MyEntrustTableViewCell class]) forIndexPath:indexPath];
+            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             MyEntrustInfoModel *model = self.hisdataArr[indexPath.row];
             cell.infomodel = model;
@@ -696,14 +711,14 @@
                 self.heightConstant.constant=0;
                 self.PriceTF.text=LocalizationKey(@"Optimal");
                 self.PriceTF.enabled=NO;
-                self.AmountTF.placeholder=LocalizationKey(@"entrustment");
+                self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LocalizationKey(@"entrustment") attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
                 self.objectCoin.text=_baseCoinName;
             }
             else{
                 self.heightConstant.constant=45;
                 self.PriceTF.text=self.nowPrice.text;
                 self.PriceTF.enabled=YES;
-                self.AmountTF.placeholder=LocalizationKey(@"amonut");
+                self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LocalizationKey(@"amonut") attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
                 self.objectCoin.text=_ObjectCoinName;
             }
             self.slider.sliderCircleImage = [UIImage imageNamed:@"circularGreen"];
@@ -736,14 +751,14 @@
                 self.heightConstant.constant=0;
                 self.PriceTF.text=LocalizationKey(@"Optimal");
                 self.PriceTF.enabled=NO;
-                self.AmountTF.placeholder=LocalizationKey(@"amonut");
+                self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LocalizationKey(@"amonut") attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
                 self.objectCoin.text=_ObjectCoinName;
             }
             else{
                 self.heightConstant.constant=45;
                 self.PriceTF.text=self.nowPrice.text;
                 self.PriceTF.enabled=YES;
-                self.AmountTF.placeholder=LocalizationKey(@"amonut");
+                self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LocalizationKey(@"amonut") attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
                 self.objectCoin.text=_ObjectCoinName;
             }
         }
@@ -767,7 +782,7 @@
                     _IsMarketprice=NO;
                     self.PriceTF.text=self.nowPrice.text;
                     self.PriceTF.enabled=YES;
-                    self.AmountTF.placeholder=LocalizationKey(@"amonut");
+                    self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LocalizationKey(@"amonut") attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
                     self.objectCoin.text=_ObjectCoinName;
                     self.CNYPrice.hidden=NO;
                     self.TradeNumber.hidden=NO;
@@ -805,7 +820,7 @@
                     self.TradeNumber.text=[NSString stringWithFormat:@"%@--",LocalizationKey(@"entrustment")];
                     if (!_IsSell) {
                         //买入
-                        self.AmountTF.placeholder=LocalizationKey(@"entrustment");
+                        self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LocalizationKey(@"entrustment") attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
                         self.objectCoin.text=_baseCoinName;
                         NSArray *coinArray = [[marketManager shareInstance].symbol componentsSeparatedByString:@"/"];
                         if ([YLUserInfo isLogIn]) {
@@ -813,7 +828,7 @@
                     }
                     else{
                         //卖出
-                        self.AmountTF.placeholder=LocalizationKey(@"amonut");
+                        self.AmountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LocalizationKey(@"amonut") attributes:@{NSForegroundColorAttributeName: PlaceholderColor}];
                         self.objectCoin.text=_ObjectCoinName;
                         NSArray *coinArray = [[marketManager shareInstance].symbol componentsSeparatedByString:@"/"];
                         if ([YLUserInfo isLogIn]) {
@@ -883,10 +898,10 @@
                     }
                     __weak TradeViewController*weakSelf=self;
                     EasyShowAlertView *showView =[EasyShowAlertView showActionSheetWithTitle:LocalizationKey(@"commissionbuy") left1message:[NSString stringWithFormat:@"%@%@",[ToolUtil stringFromNumber:[self.PriceTF.text doubleValue] withlimit:_baseCoinScale],_baseCoinName] right1message:[NSString stringWithFormat:@"%@%@",[ToolUtil stringFromNumber:[self.AmountTF.text doubleValue] withlimit:_coinScale],_objectCoin.text] left2message:[NSString stringWithFormat:@"%@%@",[ToolUtil stringFromNumber:[self.PriceTF.text doubleValue]*[self.AmountTF.text doubleValue] withlimit:_baseCoinScale],_baseCoinName] right2message:LocalizationKey(@"buyDirection")];
-                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowStatusTextTypeWhiteBGGreen callback:^(EasyShowAlertView *showview) {
                         [weakSelf commitBuyCommission:@"BUY"];
                     }];
-                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowStatusTextTypeWhiteBGBlack callback:^(EasyShowAlertView *showview) {
                     }];
                     [EasyShowOptions sharedEasyShowOptions].alertTintColor = kRGBColor(18, 22, 28);
                     [EasyShowOptions sharedEasyShowOptions].alertTitleColor = RGBOF(0xe6e6e6);
@@ -906,10 +921,10 @@
                     
                     __weak TradeViewController*weakSelf=self;
                     EasyShowAlertView *showView =[EasyShowAlertView showActionSheetWithTitle:LocalizationKey(@"commissionbuy") left1message:LocalizationKey(@"marketPrice") right1message:[NSString stringWithFormat:@"%@%@",@"--",_ObjectCoinName] left2message:[NSString stringWithFormat:@"%.8f%@",[self.AmountTF.text doubleValue],_baseCoinName] right2message:LocalizationKey(@"Buy")];
-                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowStatusTextTypeWhiteBGGreen callback:^(EasyShowAlertView *showview) {
                         [weakSelf commitBuyCommission:@"BUY"];
                     }];
-                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowStatusTextTypeWhiteBGBlack callback:^(EasyShowAlertView *showview) {
                     }];
                     [showView show];
                 }
@@ -940,10 +955,10 @@
                     
                     __weak TradeViewController*weakSelf=self;
                     EasyShowAlertView *showView =[EasyShowAlertView showActionSheetWithTitle:LocalizationKey(@"commissionsell") left1message:[NSString stringWithFormat:@"%@%@",[ToolUtil stringFromNumber:[self.PriceTF.text doubleValue] withlimit:_baseCoinScale],_baseCoinName] right1message:[NSString stringWithFormat:@"%@%@",[ToolUtil stringFromNumber:[self.AmountTF.text doubleValue] withlimit:_coinScale],_ObjectCoinName] left2message:[NSString stringWithFormat:@"%.8f%@",[self.PriceTF.text doubleValue]*[self.AmountTF.text doubleValue],_baseCoinName] right2message:LocalizationKey(@"sellDirection")];
-                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowStatusTextTypeWhiteBGRed callback:^(EasyShowAlertView *showview) {
                         [weakSelf commitBuyCommission:@"SELL"];
                     }];
-                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowStatusTextTypeWhiteBGBlack callback:^(EasyShowAlertView *showview) {
                     }];
                     [showView show];
                 }
@@ -960,11 +975,12 @@
                     
                     __weak TradeViewController*weakSelf=self;
                     EasyShowAlertView *showView =[EasyShowAlertView showActionSheetWithTitle:LocalizationKey(@"commissionsell") left1message:LocalizationKey(@"marketPrice") right1message:[NSString stringWithFormat:@"%@%@",[ToolUtil stringFromNumber:[self.AmountTF.text doubleValue] withlimit:_coinScale],_ObjectCoinName] left2message:[NSString stringWithFormat:@"%@%@",@"--",_baseCoinName] right2message:LocalizationKey(@"sellDirection")];
-                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"confirm") itemType:ShowStatusTextTypeWhiteBGRed callback:^(EasyShowAlertView *showview) {
                         [weakSelf commitBuyCommission:@"SELL"];
                     }];
-                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowAlertItemTypeBlack callback:^(EasyShowAlertView *showview) {
+                    [showView addItemWithTitle:LocalizationKey(@"cancel") itemType:ShowStatusTextTypeWhiteBGBlack callback:^(EasyShowAlertView *showview) {
                     }];
+                    
                     [showView show];
                 }
             }

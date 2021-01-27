@@ -10,6 +10,7 @@
 #import "UIView+EasyShowExt.h"
 #import "EasyShowOptions.h"
 #import "EasyShowLabel.h"
+#import "UIColor+Hex.h"
 @interface EasyShowAlertItem : NSObject
 @property (nonatomic,strong)NSString *title ;
 @property (nonatomic,assign)ShowAlertItemType itemTpye ;
@@ -196,15 +197,15 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         UIView*view=[[UIView alloc]init];
         view.layer.borderWidth=1.0;
         view.layer.borderColor=kRGBColor(18, 22, 28).CGColor;
-        view.backgroundColor=mainColor;
+        view.backgroundColor=[UIColor colorWithHexString:@"#0E1321"];
         [self.alertBgView addSubview:view];
         /*label1*/
         UILabel *label1=[[UILabel alloc]init];
-        label1.textColor=kRGBColor(104, 104, 104);
+        label1.textColor= [UIColor whiteColor];
         label1.font=[UIFont systemFontOfSize:15.0];
         [self.alertBgView  addSubview:label1];
         NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString: [NSString stringWithFormat:@"%@:  %@",LocalizationKey(@"entrustPrice"),_left1Message]];
-                [str1 addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(str1.length-_left1Message.length,_left1Message.length)];
+                [str1 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1AB178"] range:NSMakeRange(str1.length-_left1Message.length,_left1Message.length)];
 
         label1.attributedText=str1;
         label1.textAlignment=NSTextAlignmentLeft;
@@ -215,11 +216,11 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
 
         /*label2*/
         UILabel *label2=[[UILabel alloc]init];
-        label2.textColor=kRGBColor(104, 104, 104);
+        label2.textColor= [UIColor whiteColor];
         label2.font=[UIFont systemFontOfSize:15.0];
         [self.alertBgView  addSubview:label2];
         NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@:  %@",LocalizationKey(@"entrustNum"),_right1Message]];
-        [str2 addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(str2.length-_right1Message.length,_right1Message.length)];
+        [str2 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1AB178"] range:NSMakeRange(str2.length-_right1Message.length,_right1Message.length)];
         label2.attributedText=str2;
         label2.numberOfLines = 0;
         label2.textAlignment=NSTextAlignmentLeft;
@@ -235,8 +236,8 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         label3.font=[UIFont systemFontOfSize:15.0];
         [self.alertBgView  addSubview:label3];
         NSMutableAttributedString *str3 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@:  %@",LocalizationKey(@"delegateTotal"),_left2Message]];
-        label3.textColor=kRGBColor(104, 104, 104);
-        [str3 addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(str3.length-_left2Message.length,_left2Message.length)];
+        label3.textColor= [UIColor whiteColor];
+        [str3 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1AB178"] range:NSMakeRange(str3.length-_left2Message.length,_left2Message.length)];
         label3.attributedText=str3;
         label3.numberOfLines = 0;
         label3.textAlignment=NSTextAlignmentLeft;
@@ -250,9 +251,9 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         [self.alertBgView  addSubview:label4];
         NSMutableAttributedString *str4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@:  %@",LocalizationKey(@"commissiontype"),_right2Message]];
         label4.textAlignment=NSTextAlignmentCenter;
-        label4.textColor=kRGBColor(104, 104, 104);
+        label4.textColor= [UIColor whiteColor];
         label4.textAlignment=NSTextAlignmentLeft;
-        [str4 addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(str4.length-_right2Message.length,_right2Message.length)];
+        [str4 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1AB178"] range:NSMakeRange(str4.length-_right2Message.length,_right2Message.length)];
         label4.attributedText=str4;
         label4.numberOfLines = 0;
         label4.lineBreakMode = NSLineBreakByCharWrapping;
@@ -266,7 +267,7 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         view.frame=CGRectMake(10, 50, SCREEN_WIDTH_S-20, Maxheight+size3.height+5+20);
         self.alertMessageLabel.frame = CGRectMake(0, self.alertTitleLabel.bottom, bgViewMaxWidth,Maxheight+size3.height+40+5+20) ;//这是总高度
         UIView*lineview=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH_S/2, 50, 1, Maxheight+size3.height+5+20)];
-        lineview.backgroundColor = mainColor;
+        lineview.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
         [self.alertBgView addSubview:lineview];
 
     }else{
@@ -374,10 +375,10 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
     button.tag = index;
     button.adjustsImageWhenHighlighted = NO;
     [button setTitle:item.title forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+  
 
-    UIImage *bgImage = [EasyShowUtils imageWithColor:mainColor];
-    UIImage *bgHighImage = [EasyShowUtils imageWithColor:mainColor ];
+    UIImage *bgImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#0E1321"]];
+    UIImage *bgHighImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#0E1321"] ];
     [button setBackgroundImage:bgImage forState:UIControlStateNormal];
     [button setBackgroundImage:bgHighImage forState:UIControlStateHighlighted];
 
@@ -408,11 +409,32 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         case ShowStatusTextTypeCustom:{
 
         }break ;
+        default:  {
+            textColor = [UIColor whiteColor];
+            textFont = [UIFont systemFontOfSize:17];
+        }break;
     }
     [button setTitleColor:textColor forState:UIControlStateNormal];
     [button setTitleColor:[textColor colorWithAlphaComponent:0.2] forState:UIControlStateHighlighted];
     [button.titleLabel setFont:textFont] ;
-
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    if (item.itemTpye == ShowStatusTextTypeWhiteBGGreen) {
+        UIImage *bgImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#1AB178"]];
+        UIImage *bgHighImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#1AB178"] ];
+        [button setBackgroundImage:bgImage forState:UIControlStateNormal];
+        [button setBackgroundImage:bgHighImage forState:UIControlStateHighlighted];
+    }else if (item.itemTpye == ShowStatusTextTypeWhiteBGGreen) {
+        UIImage *bgImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#F2535C"]];
+        UIImage *bgHighImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#F2535C"] ];
+        [button setBackgroundImage:bgImage forState:UIControlStateNormal];
+        [button setBackgroundImage:bgHighImage forState:UIControlStateHighlighted];
+    }else if (item.itemTpye == ShowStatusTextTypeWhiteBGBlack) {
+        UIImage *bgImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#1C1E2B"]];
+        UIImage *bgHighImage = [EasyShowUtils imageWithColor:[UIColor colorWithHexString:@"#1C1E2B"] ];
+        [button setBackgroundImage:bgImage forState:UIControlStateNormal];
+        [button setBackgroundImage:bgHighImage forState:UIControlStateHighlighted];
+    }
+    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertButtonArray addObject:button];
 
     return button ;
@@ -602,7 +624,7 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         else{
             _alertBgView.backgroundColor = self.options.alertTintColor;
         }
-        _alertBgView.backgroundColor = mainColor;
+        _alertBgView.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
         _alertBgView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight ;
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(bgViewPan:)] ;
         [_alertBgView addGestureRecognizer:panGesture];
@@ -640,7 +662,7 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         else{
             _alertTitleLabel.backgroundColor = self.options.alertTintColor;
         }
-        _alertTitleLabel.backgroundColor = mainColor;
+        _alertTitleLabel.backgroundColor = [UIColor colorWithHexString:@"#0E1321"];
         _alertTitleLabel.font = [UIFont boldSystemFontOfSize:17];
         _alertTitleLabel.textColor = self.options.alertTitleColor ;
         _alertTitleLabel.numberOfLines = 0;
@@ -658,7 +680,7 @@ typedef NS_ENUM(NSUInteger , alertShowType) {
         else{
             _alertMessageLabel.backgroundColor = self.options.alertTintColor;
         }
-        _alertMessageLabel.backgroundColor=mainColor;
+        _alertMessageLabel.backgroundColor=[UIColor colorWithHexString:@"#0E1321"];
         _alertMessageLabel.font = [UIFont systemFontOfSize:17];
         _alertMessageLabel.textColor = self.options.alertMessageColor;
         _alertMessageLabel.numberOfLines = 0;
