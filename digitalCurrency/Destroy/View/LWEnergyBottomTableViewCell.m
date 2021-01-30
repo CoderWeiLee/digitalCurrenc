@@ -43,7 +43,6 @@
             make.left.mas_equalTo(self.containerView).offset(11);
             make.top.mas_equalTo(self.containerView).offset(14);
         }];
-        [self.contentView addSubview:self.ownTitleLabel];
         
         self.ownAmountLabel = [[UILabel alloc] init];
         self.ownAmountLabel.text = @"";
@@ -64,7 +63,6 @@
             make.right.mas_equalTo(self.containerView).offset(-11.5);
             make.centerY.mas_equalTo(self.ownTitleLabel);
         }];
-        [self.contentView addSubview:self.myTitleLabel];
         
         self.myAmountLabel = [[UILabel alloc] init];
         self.myAmountLabel.text = @"";
@@ -83,6 +81,10 @@
     [super setSelected:selected animated:animated];
 
     
+}
+
+- (void)setModel:(WWWWModel *)model {
+    _model = model;
 }
 
 @end

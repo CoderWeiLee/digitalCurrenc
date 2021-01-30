@@ -47,6 +47,41 @@
     }];
 }
 
+- (void)requestPostWithToken:(NSString *)url andHeaderParam:(NSDictionary *)param finish:(void (^)(NSDictionary *, ReqestType))finish {
+//    NSString *requestUrl=[NSString stringWithFormat:@"%@%@",BASE_URL,url];
+//    NSLog(@"jsonPost %@ /n 内容：%@",requestUrl,param);
+    
+    AFHTTPSessionManager *manager= [AFHTTPSessionManager shareManager];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    NSString*md5Str= [YLUserInfo shareUserInfo].token;
+//    NSString *tokenString = [NSString stringWithFormat:@"Bearer %@", @"03f4a7e019fba0332cf700f79cbb664e"];
+//    [manager.requestSerializer setValue:tokenString forHTTPHeaderField:@"Authorization"];
+//    [manager.requestSerializer setValue:md5Str forHTTPHeaderField:@"access-auth-token"];
+//    NSDictionary *headers = @{@"Authorization":[NSString stringWithFormat:@"Bearer %@",@"03f4a7e019fba0332cf700f79cbb664e"]};
+    NSDictionary *headers = @{@"Authorization":[NSString stringWithFormat:@"Bearer %@",[YLUserInfo shareUserInfo].token],@"token": [YLUserInfo shareUserInfo].token};
+    [self languageSwitch:manager];
+    [manager POST:url parameters:nil headers: headers  progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSError *error;
+        if([responseObject isKindOfClass:[NSData class]]){
+            NSString * str  =[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            
+            NSString * transStr = [self removeUnescapedCharacter:str];
+            NSData * data = [transStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *resdic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error];
+            
+            ReqestType flag = Successeds;
+            finish(resdic,flag);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSDictionary *dic = @{@"error":error};
+        NSLog(@"大哥出错了错误接口URL = %@  ---  错误原因error === %@",url,error.localizedDescription);
+        finish(dic,Fails);
+    }];
+}
+
 - (void)requsetUplodImage:(NSData *)imageData andImageName:(NSString *)imageName andUserID:(NSString *)userID finish:(void (^)(id imageUrl,ReqestType flag))finish{
     
     NSData *datas=[[NSString stringWithFormat:@"%@",userID] dataUsingEncoding:NSUTF8StringEncoding];
@@ -253,6 +288,14 @@
 -(NSMutableDictionary *)httpHeaderDic{
     NSMutableDictionary *httpHeaderDic = [NSMutableDictionary dictionaryWithCapacity:1];
 //    httpHeaderDic[@"token"] = [WTUserInfo shareUserInfo].token;
+    return httpHeaderDic;
+}
+
+- (NSMutableDictionary *)httpHeaderWithTokenDic {
+    NSMutableDictionary *httpHeaderDic = [NSMutableDictionary dictionaryWithCapacity:1];
+    httpHeaderDic[@"token"] = [YLUserInfo shareUserInfo].token;
+    httpHeaderDic[@"access-auth-token"] = [YLUserInfo shareUserInfo].token;
+    httpHeaderDic[@"Authorization"] = [NSString stringWithFormat:@"Bearer %@", [YLUserInfo shareUserInfo].token];
     return httpHeaderDic;
 }
 

@@ -43,7 +43,7 @@
             make.left.mas_equalTo(self.containerView).offset(11);
             make.top.mas_equalTo(self.containerView).offset(14);
         }];
-        [self.contentView addSubview:self.lockTitleLabel];
+        [self.containerView addSubview:self.lockTitleLabel];
         
         self.lockAmountLabel = [[UILabel alloc] init];
         self.lockAmountLabel.text = @"";
@@ -59,7 +59,7 @@
         self.releaseTitleLabel.text = @"ATO已释放";
         self.releaseTitleLabel.font = [UIFont systemFontOfSize:11];
         self.releaseTitleLabel.textColor = [UIColor colorWithHexString:@"#848484"];
-        [self.contentView addSubview:self.releaseTitleLabel];
+        [self.containerView addSubview:self.releaseTitleLabel];
         [self.releaseTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.contentView);
             make.centerY.mas_equalTo(self.lockTitleLabel);
@@ -81,6 +81,10 @@
     [super setSelected:selected animated:animated];
 
     
+}
+
+- (void)setModel:(WWWWModel *)model {
+    _model = model;
 }
 
 @end

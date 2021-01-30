@@ -91,7 +91,9 @@
 #define qutesGreenColor rgba(92, 202, 104, 1)
 #define qutesDefaultColor rgba(62, 84, 107, 1)
 
+//http://12345.abc.tm
 #define BASE_URL @"https://c1.nextisknow.com"
+//#define BASE_URL @"http://12345.abc.tm"
 #define BASE_MALL_URLL @"http://www.ysgf.vip"
 
 #define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]

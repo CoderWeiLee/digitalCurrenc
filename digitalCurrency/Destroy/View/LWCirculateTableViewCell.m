@@ -104,4 +104,11 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setModel:(WWWWModel *)model {
+    _model = model;
+    self.produceAmountLabel.text = _model.todayBonus;
+    self.pledgeAmountLabel.text = _model.todayExchange;
+    self.currentAmountLabel.text = [NSString stringWithFormat:@"%d",[_model.todayExchange intValue] - [_model.todayBonus intValue]];
+}
+
 @end

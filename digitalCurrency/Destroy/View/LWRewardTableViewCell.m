@@ -156,4 +156,15 @@
     
 }
 
+
+- (void)setModel:(WWWWModel *)model {
+    _model = model;
+    self.totalInvestAmountLabel.text = _model.totalExchange;
+    self.myInvestAmountLabel.text = _model.myValue;
+    self.openSourceAmountLabel.text = _model.dynamicMoney;
+    self.ownedATOTitleLabel.text = _model.bonusMoney;
+    self.surplusATOAmountLabel.text = _model.lessBonusMoney;
+    
+}
+
 @end

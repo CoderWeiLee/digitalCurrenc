@@ -108,7 +108,7 @@
         self.btn2.layer.masksToBounds = YES;
         [self.btn2 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.containerView addSubview:self.btn2];
-        [self.btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.btn2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(@60);
             make.height.mas_equalTo(@30);
             make.left.mas_equalTo(self.btn1.mas_right).offset(5.5);
@@ -204,6 +204,10 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+}
+
+- (void)setModel:(WWWWModel *)model {
+    _model = model;
 }
 
 @end

@@ -573,6 +573,8 @@
 		CA735E3625AB3F1D00B605AC /* DCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA735E3525AB3F1D00B605AC /* DCExtensions.swift */; };
 		CA76CB7A25A9D45000F0154E /* DCDistroyDealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA76CB7925A9D45000F0154E /* DCDistroyDealVC.swift */; };
 		CA76CB7E25A9D45900F0154E /* DCDistroyDealVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA76CB7D25A9D45900F0154E /* DCDistroyDealVC.storyboard */; };
+		D06C81DA25C3EF7800380C73 /* WWWWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D06C81D925C3EF7800380C73 /* WWWWModel.m */; };
+		D06C81DD25C3F38A00380C73 /* powerPool.gif in Resources */ = {isa = PBXBuildFile; fileRef = D06C81DC25C3F38A00380C73 /* powerPool.gif */; };
 		D0F206F225BAB3350032B17D /* LWDestroyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */; };
 		D0F2071B25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2071A25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m */; };
 		D0F2072025BAC4F50032B17D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2071F25BAC4F50032B17D /* UIColor+Hex.m */; };
@@ -1543,6 +1545,9 @@
 		CA735E3525AB3F1D00B605AC /* DCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCExtensions.swift; sourceTree = "<group>"; };
 		CA76CB7925A9D45000F0154E /* DCDistroyDealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCDistroyDealVC.swift; sourceTree = "<group>"; };
 		CA76CB7D25A9D45900F0154E /* DCDistroyDealVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DCDistroyDealVC.storyboard; sourceTree = "<group>"; };
+		D06C81D825C3EF7800380C73 /* WWWWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WWWWModel.h; sourceTree = "<group>"; };
+		D06C81D925C3EF7800380C73 /* WWWWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWWModel.m; sourceTree = "<group>"; };
+		D06C81DC25C3F38A00380C73 /* powerPool.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = powerPool.gif; sourceTree = "<group>"; };
 		D0F206F025BAB3350032B17D /* LWDestroyHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyHeaderView.h; sourceTree = "<group>"; };
 		D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWDestroyHeaderView.m; sourceTree = "<group>"; };
 		D0F2071925BAC2CE0032B17D /* LWDestroyAmountTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyAmountTableViewCell.h; sourceTree = "<group>"; };
@@ -2058,6 +2063,8 @@
 				9241B81125469DA600FF2FFB /* AppDelegate.h */,
 				9241B8F825469DA600FF2FFB /* AppDelegate.m */,
 				9241BB4E25469DA700FF2FFB /* Info.plist */,
+				D06C81D825C3EF7800380C73 /* WWWWModel.h */,
+				D06C81D925C3EF7800380C73 /* WWWWModel.m */,
 				92419129254AD2750020F25C /* wwwwwViewController.h */,
 				9241912A254AD2750020F25C /* wwwwwViewController.m */,
 			);
@@ -2573,6 +2580,7 @@
 				9241B90025469DA600FF2FFB /* LaunchScreen.storyboard */,
 				9241B90225469DA600FF2FFB /* Main.storyboard */,
 				9241B90625469DA600FF2FFB /* m_click.wav */,
+				D06C81DC25C3F38A00380C73 /* powerPool.gif */,
 				9241B90725469DA600FF2FFB /* 启动页.gif */,
 			);
 			path = Resource;
@@ -3739,6 +3747,7 @@
 				9241BCC925469DA800FF2FFB /* AdvertisingBuyViewController.xib in Resources */,
 				9241BCBD25469DA800FF2FFB /* ApplyBusinessViewController.xib in Resources */,
 				9241BD0825469DA800FF2FFB /* marketCell.xib in Resources */,
+				D06C81DD25C3F38A00380C73 /* powerPool.gif in Resources */,
 				9241BBC525469DA700FF2FFB /* m_click.wav in Resources */,
 				9241BC6925469DA800FF2FFB /* MyEntrustDetail1TableViewCell.xib in Resources */,
 				9241BC8E25469DA800FF2FFB /* TradeNumCell.xib in Resources */,
@@ -4200,6 +4209,7 @@
 				92044D2125610B2200B53A1A /* DemoAyncTask.m in Sources */,
 				3A79494C258F141400595623 /* NSDictionary+WTNull.m in Sources */,
 				9241BC0C25469DA700FF2FFB /* WalletManageViewController.m in Sources */,
+				D06C81DA25C3EF7800380C73 /* WWWWModel.m in Sources */,
 				9241BC1325469DA700FF2FFB /* WalletButTableViewCell.m in Sources */,
 				9241BBE825469DA700FF2FFB /* HQPickerView.m in Sources */,
 				9241BBCF25469DA700FF2FFB /* AboutUSModel.m in Sources */,

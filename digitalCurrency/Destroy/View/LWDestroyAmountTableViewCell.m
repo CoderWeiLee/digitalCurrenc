@@ -104,4 +104,11 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setModel:(WWWWModel *)model {
+    _model = model;
+    self.actAmountLabel.text = _model.actTotal;
+    self.desAmountLabel.text = _model.actDestory;
+    self.remainAmountLabel.text = [NSString stringWithFormat:@"%d",[_model.actTotal intValue] - [_model.actDestory intValue]];
+}
+
 @end

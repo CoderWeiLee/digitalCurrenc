@@ -16,7 +16,8 @@
 
 
 //#define   HOST     @"https://abc.weikuaikeji.com:8801/"
-#define   HOST     @"https://1233501.abc.tm/"
+//#define   HOST     @"https://1233501.abc.tm/"
+#define HOST  @"http://12345.abc.tm/"
 
 
 #define kUpdateAppStore 0 //是否上传到appStore 0企业分发 1appStore

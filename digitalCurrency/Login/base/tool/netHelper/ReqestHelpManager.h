@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger,ReqestType){
 @interface ReqestHelpManager : NSObject
 +(ReqestHelpManager *)share;
 - (void)requestPost:(NSString *)url andHeaderParam:(NSDictionary *)param finish:(void(^)(NSDictionary *dicForData,ReqestType flag))finish;
+- (void)requestPostWithToken:(NSString *)url andHeaderParam:(NSDictionary *)param finish:(void (^)(NSDictionary *, ReqestType flag))finish;
 
 - (void)requsetUplodImage:(NSData *)imageData andImageName:(NSString *)imageName andUserID:(NSString *)userID finish:(void(^)(id imageUrl,ReqestType flag))finish;
 

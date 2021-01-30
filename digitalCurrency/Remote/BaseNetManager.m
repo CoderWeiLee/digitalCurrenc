@@ -205,8 +205,8 @@
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     //NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        NSLog(@"接口数据：%@ \n %@ \n %@",urlStr, parameter, result)
+//        id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+//        NSLog(@"接口数据：%@ \n %@ \n %@",urlStr, parameter, result)
         if (data && [BaseNetManager showResponseCode:response] == 200) {
             id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{

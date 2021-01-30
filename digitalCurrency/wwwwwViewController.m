@@ -9,10 +9,20 @@
 #import "wwwwwViewController.h"
 #import <Masonry/Masonry.h>
 #import "LWDestroyHeaderView.h"
-#import <WebKit/WebKit.h>
-@interface wwwwwViewController ()<UITableViewDataSource, UITableViewDelegate, WKNavigationDelegate>
+#import "ReqestHelpManager.h"
+#import "AFNetworkClass.h"
+#import "BaseNetManager.h"
+#import <MJExtension/MJExtension.h>
+#import "WWWWModel.h"
+#import "LWDestroyAmountTableViewCell.h"
+#import "LWCirculateTableViewCell.h"
+#import "LWRewardTableViewCell.h"
+#import "LWLockTableViewCell.h"
+#import "LWEnergyTableViewCell.h"
+#import "LWEnergyBottomTableViewCell.h"
+@interface wwwwwViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic,strong)WKWebView *webView;
+@property (nonatomic, strong) WWWWModel *model;
 @end
 
 @implementation wwwwwViewController
@@ -20,15 +30,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"销毁交易";
-//    self.tableView = [[UITableView alloc]init];
-//    self.tableView.dataSource = self;
-//    self.tableView.delegate = self;
-//    [self.view addSubview:self.tableView];
-//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.view);
-//    }];
-//    [self.tableView registerClass:[LWDestroyHeaderView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([LWDestroyHeaderView class])];
-    [self.view addSubview:[self webView]];
+    self.tableView = [[UITableView alloc]init];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    [self.tableView registerClass:[LWDestroyHeaderView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([LWDestroyHeaderView class])];
+    [self.tableView registerClass:[LWDestroyAmountTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWDestroyAmountTableViewCell class])];
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    [self.tableView registerClass:[LWCirculateTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWCirculateTableViewCell class])];
+    [self.tableView registerClass:[LWRewardTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWRewardTableViewCell class])];
+    [self.tableView registerClass:[LWLockTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWLockTableViewCell class])];
+    [self.tableView registerClass:[LWEnergyTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWEnergyTableViewCell class])];
+    [self.tableView registerClass:[LWEnergyBottomTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWEnergyBottomTableViewCell class])];
+    [BaseNetManager requestWithPost:@"http://12345.abc.tm/device/index/info" header:@{@"token": [YLUserInfo shareUserInfo].token} parameters:nil successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+        if ([resultObject[@"message"] isEqualToString:@"success"]) {
+            self.model = [WWWWModel mj_objectWithKeyValues:resultObject[@"data"]];
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 
@@ -41,68 +63,69 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 42;
+    return 80;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:
+            return 80;
+        case 1:
+            return 80;
+        case 2:
+            return 150;
+        case 3:
+            return 150;
+        case 4:
+            return 400;
+        default:
+            return 120;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"" forIndexPath:indexPath];
-    
-    return cell;
-}
+    switch (indexPath.row) {
+        case 0:
+        {
+            LWDestroyAmountTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWDestroyAmountTableViewCell class]) forIndexPath:indexPath];
+            cell.model = self.model;
+            return  cell;
+        }
+        case 1:
+        {
+            LWCirculateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWCirculateTableViewCell class]) forIndexPath:indexPath];
+            cell.model = self.model;
+            return  cell;
+        }
+        case 2:
+        {
+            LWRewardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWRewardTableViewCell class]) forIndexPath:indexPath];
+            cell.model = self.model;
+            return  cell;
+        }
+        case 3:
+        {
+            LWLockTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWLockTableViewCell class]) forIndexPath:indexPath];
+            cell.model = self.model;
+            return  cell;
+        }
+        case 4:
+        {
+            LWEnergyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWEnergyTableViewCell class]) forIndexPath:indexPath];
+            cell.model = self.model;
+            return  cell;
+        }
 
--(WKWebView *)webView{
-    if (!_webView) {
-        NSString*md5Str= [YLUserInfo shareUserInfo].token;
-
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH-NEW_NavHeight)];
-        _webView.navigationDelegate = self;
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://device.abc.tm/?token=%@",md5Str]]]];
+        default:
+        {
+            LWEnergyBottomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWEnergyBottomTableViewCell class]) forIndexPath:indexPath];
+            cell.model = self.model;
+            return  cell;
+        }
     }
-    return _webView;
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
-    [EasyShowLodingView hidenLoding];
-    NSString *js=@"var script = document.createElement('script');"
-    "script.type = 'text/javascript';"
-    "script.text = \"function ResizeImages() { "
-    "var myimg,oldwidth;"
-    "var maxwidth = %f;"
-    "for(i=0;i <document.images.length;i++){"
-    "myimg = document.images[i];"
-    "if(myimg.width > maxwidth){"
-    "oldwidth = myimg.width;"
-    "myimg.width = %f;"
-    "}"
-    "}"
-    "}\";"
-    "document.getElementsByTagName('head')[0].appendChild(script);";
-    js = [NSString stringWithFormat:js,[UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.width-20];
-    [webView evaluateJavaScript:js completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        
-    }];
-    [webView evaluateJavaScript:@"ResizeImages();" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        
-    }];
-    [webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#999999'" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        
-    }];
-}
-
-#pragma mark - WKNavigationDelegate
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
-    [EasyShowLodingView showLodingText:LocalizationKey(@"aaaaaa")];
-}
-#pragma mark - WKNavigationDelegate
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
-   [EasyShowLodingView hidenLoding];
-}
- 
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
-    [EasyShowLodingView hidenLoding];
 }
 @end
