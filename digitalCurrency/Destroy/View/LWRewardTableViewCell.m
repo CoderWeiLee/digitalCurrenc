@@ -20,7 +20,7 @@
 
 //开源查询
 @property (nonatomic, strong) UILabel *openSourceTitleLabel;
-@property (nonatomic, strong) UILabel *openSourceAmountLabel;
+@property (nonatomic, strong) UIImageView *openSourceImageView;
 
 //已获得ATO
 @property (nonatomic, strong) UILabel *ownedATOTitleLabel;
@@ -86,25 +86,23 @@
             make.centerY.mas_equalTo(self.totalInvestAmountLabel);
         }];
         
+        self.openSourceImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"opensource"]];
+        [self.containerView addSubview:self.openSourceImageView];
+        [self.openSourceImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.myInvestTitleLabel);
+            make.right.mas_equalTo(self.containerView).offset(-11);
+        }];
+        
         self.openSourceTitleLabel = [[UILabel alloc] init];
-        self.openSourceTitleLabel.text = @"开源查询";
+        self.openSourceTitleLabel.text = @"公开开源";
         self.openSourceTitleLabel.font = [UIFont systemFontOfSize:11];
         self.openSourceTitleLabel.textColor = [UIColor colorWithHexString:@"#848484"];
         [self.containerView addSubview:self.openSourceTitleLabel];
         [self.openSourceTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self.containerView).offset(-11.5);
-            make.centerY.mas_equalTo(self.totalInvestTitleLabel);
+            make.centerX.mas_equalTo(self.openSourceImageView);
+            make.centerY.mas_equalTo(self.myInvestAmountLabel);
         }];
         
-        self.openSourceAmountLabel = [[UILabel alloc] init];
-        self.openSourceAmountLabel.text = @"";
-        self.openSourceAmountLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.openSourceAmountLabel.textColor = [UIColor whiteColor];
-        [self.containerView addSubview:self.openSourceAmountLabel];
-        [self.openSourceAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self.openSourceTitleLabel);
-            make.centerY.mas_equalTo(self.totalInvestAmountLabel);
-        }];
         
         self.ownedATOTitleLabel = [[UILabel alloc] init];
         self.ownedATOTitleLabel.text = @"已获得ATO";
@@ -162,7 +160,6 @@
     _model = model;
     self.totalInvestAmountLabel.text = _model.totalExchange;
     self.myInvestAmountLabel.text = _model.myValue;
-    self.openSourceAmountLabel.text = _model.dynamicMoney;
     self.ownedATOTitleLabel.text = _model.bonusMoney;
     self.surplusATOAmountLabel.text = _model.lessBonusMoney;
     
