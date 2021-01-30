@@ -1,5 +1,5 @@
 //
-//  LWDestroyHeaderView.h
+//  LWDestroyHeaderCell.h
 //  digitalCurrenc
 //
 //  Created by 李伟 on 2021/1/22.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LWDestroyHeaderView : UITableViewHeaderFooterView
+@interface LWDestroyHeaderCell : UITableViewCell
 
 @end
 

@@ -8,7 +8,7 @@
 
 #import "wwwwwViewController.h"
 #import <Masonry/Masonry.h>
-#import "LWDestroyHeaderView.h"
+#import "LWDestroyHeaderCell.h"
 #import "ReqestHelpManager.h"
 #import "AFNetworkClass.h"
 #import "BaseNetManager.h"
@@ -29,15 +29,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"销毁交易";
+//    self.navigationItem.title = @"销毁交易";
+    self.view.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
+    self.navigationController.navigationBar.hidden = YES;
     self.tableView = [[UITableView alloc]init];
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    [self.tableView registerClass:[LWDestroyHeaderView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([LWDestroyHeaderView class])];
+    [self.tableView registerClass:[LWDestroyHeaderCell class] forCellReuseIdentifier:NSStringFromClass([LWDestroyHeaderCell class])];
     [self.tableView registerClass:[LWDestroyAmountTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWDestroyAmountTableViewCell class])];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.tableView registerClass:[LWCirculateTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWCirculateTableViewCell class])];
@@ -57,11 +60,6 @@
 
 
 #pragma mark - UITableViewDataSource
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    LWDestroyHeaderView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([LWDestroyHeaderView class])];
-    return headView;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 80;
 }
@@ -73,10 +71,12 @@
         case 1:
             return 80;
         case 2:
-            return 150;
+            return 80;
         case 3:
             return 150;
         case 4:
+            return 150;
+        case 5:
             return 400;
         default:
             return 120;
@@ -84,36 +84,41 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
         {
-            LWDestroyAmountTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWDestroyAmountTableViewCell class]) forIndexPath:indexPath];
-            cell.model = self.model;
+            LWDestroyHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWDestroyHeaderCell class]) forIndexPath:indexPath];
             return  cell;
         }
         case 1:
         {
-            LWCirculateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWCirculateTableViewCell class]) forIndexPath:indexPath];
+            LWDestroyAmountTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWDestroyAmountTableViewCell class]) forIndexPath:indexPath];
             cell.model = self.model;
             return  cell;
         }
         case 2:
         {
-            LWRewardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWRewardTableViewCell class]) forIndexPath:indexPath];
+            LWCirculateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWCirculateTableViewCell class]) forIndexPath:indexPath];
             cell.model = self.model;
             return  cell;
         }
         case 3:
         {
-            LWLockTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWLockTableViewCell class]) forIndexPath:indexPath];
+            LWRewardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWRewardTableViewCell class]) forIndexPath:indexPath];
             cell.model = self.model;
             return  cell;
         }
         case 4:
+        {
+            LWLockTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWLockTableViewCell class]) forIndexPath:indexPath];
+            cell.model = self.model;
+            return  cell;
+        }
+        case 5:
         {
             LWEnergyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWEnergyTableViewCell class]) forIndexPath:indexPath];
             cell.model = self.model;

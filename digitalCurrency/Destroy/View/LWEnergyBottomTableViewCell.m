@@ -22,8 +22,9 @@
 @implementation LWEnergyBottomTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.contentView.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
         self.containerView = [[UIView alloc] init];
-        self.containerView.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+        self.containerView.backgroundColor = [UIColor colorWithRed:30.0 / 255.0 green:30.0 / 255.0 blue:30.0 / 255.0 alpha:1];
         self.containerView.layer.cornerRadius = 5;
         self.containerView.layer.masksToBounds = YES;
         [self.contentView addSubview:self.containerView];

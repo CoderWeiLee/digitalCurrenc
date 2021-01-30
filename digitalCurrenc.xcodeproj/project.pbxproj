@@ -575,7 +575,7 @@
 		CA76CB7E25A9D45900F0154E /* DCDistroyDealVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA76CB7D25A9D45900F0154E /* DCDistroyDealVC.storyboard */; };
 		D06C81DA25C3EF7800380C73 /* WWWWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D06C81D925C3EF7800380C73 /* WWWWModel.m */; };
 		D06C81DD25C3F38A00380C73 /* powerPool.gif in Resources */ = {isa = PBXBuildFile; fileRef = D06C81DC25C3F38A00380C73 /* powerPool.gif */; };
-		D0F206F225BAB3350032B17D /* LWDestroyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */; };
+		D0F206F225BAB3350032B17D /* LWDestroyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */; };
 		D0F2071B25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2071A25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m */; };
 		D0F2072025BAC4F50032B17D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2071F25BAC4F50032B17D /* UIColor+Hex.m */; };
 		D0F2072425BAD4250032B17D /* LWRewardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2072325BAD4250032B17D /* LWRewardTableViewCell.m */; };
@@ -1548,8 +1548,8 @@
 		D06C81D825C3EF7800380C73 /* WWWWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WWWWModel.h; sourceTree = "<group>"; };
 		D06C81D925C3EF7800380C73 /* WWWWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWWModel.m; sourceTree = "<group>"; };
 		D06C81DC25C3F38A00380C73 /* powerPool.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = powerPool.gif; sourceTree = "<group>"; };
-		D0F206F025BAB3350032B17D /* LWDestroyHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyHeaderView.h; sourceTree = "<group>"; };
-		D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWDestroyHeaderView.m; sourceTree = "<group>"; };
+		D0F206F025BAB3350032B17D /* LWDestroyHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyHeaderCell.h; sourceTree = "<group>"; };
+		D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWDestroyHeaderCell.m; sourceTree = "<group>"; };
 		D0F2071925BAC2CE0032B17D /* LWDestroyAmountTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyAmountTableViewCell.h; sourceTree = "<group>"; };
 		D0F2071A25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWDestroyAmountTableViewCell.m; sourceTree = "<group>"; };
 		D0F2071E25BAC4F50032B17D /* UIColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -3599,8 +3599,8 @@
 		D0F206ED25BAB2C70032B17D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D0F206F025BAB3350032B17D /* LWDestroyHeaderView.h */,
-				D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */,
+				D0F206F025BAB3350032B17D /* LWDestroyHeaderCell.h */,
+				D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */,
 				D0F2071925BAC2CE0032B17D /* LWDestroyAmountTableViewCell.h */,
 				D0F2071A25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m */,
 				D0F2072625BAD4DA0032B17D /* LWCirculateTableViewCell.h */,
@@ -4126,7 +4126,7 @@
 				3A794902258F12CE00595623 /* YYTextMagnifier.m in Sources */,
 				9241BB7225469DA700FF2FFB /* Y_VolumeMAView.m in Sources */,
 				9241BC6B25469DA800FF2FFB /* AactionCollectionViewCell.m in Sources */,
-				D0F206F225BAB3350032B17D /* LWDestroyHeaderView.m in Sources */,
+				D0F206F225BAB3350032B17D /* LWDestroyHeaderCell.m in Sources */,
 				9241BBCD25469DA700FF2FFB /* MyCommissionModel.m in Sources */,
 				9241BBDB25469DA700FF2FFB /* ChatModel.m in Sources */,
 				3A794972258F177B00595623 /* AESCipher.m in Sources */,
