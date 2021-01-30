@@ -54,7 +54,7 @@
         }
         self.energyImageView = [[UIImageView alloc] init];
         self.energyImageView.animationImages = frames;//将图片数组加入UIImageView动画数组中
-        [self.energyImageView startAnimating];
+        self.energyImageView.animationDuration = 10;
         [self.containerView addSubview:self.energyImageView];
         [self.energyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.containerView).offset(11);
@@ -122,7 +122,7 @@
         [self.btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn2.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn2.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn2.layer.cornerRadius = 3;
         self.btn2.layer.masksToBounds = YES;
         [self.btn2 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -141,7 +141,7 @@
         [self.btn3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn3.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn3.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn3.layer.cornerRadius = 3;
         self.btn3.layer.masksToBounds = YES;
         [self.btn3 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -160,7 +160,7 @@
         [self.btn4 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn4 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn4.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn4.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn4.layer.cornerRadius = 4;
         self.btn4.layer.masksToBounds = YES;
         [self.btn4 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -179,7 +179,7 @@
         [self.btn5 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn5 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn5.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn5.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn5.layer.cornerRadius = 3;
         self.btn5.layer.masksToBounds = YES;
         [self.btn5 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -212,7 +212,78 @@
 }
 
 - (void)btnAction:(UIButton *)btn {
-    
+    switch (btn.tag) {
+        case 1:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn1.selected = YES;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        case 2:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn2.selected = YES;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        case 3:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn3.selected = YES;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        case 4:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn4.selected = YES;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        default:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn5.selected = YES;
+            break;
+        }
+    }
 }
 
 - (void)commmitAction:(UIButton *)btn {
@@ -227,7 +298,7 @@
 
 - (void)setModel:(WWWWModel *)model {
     _model = model;
-//    [self.energyImageView ]
+    [self.energyImageView startAnimating];
 }
 
 @end

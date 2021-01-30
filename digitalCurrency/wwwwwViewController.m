@@ -73,9 +73,9 @@
         case 2:
             return 80;
         case 3:
-            return 150;
+            return 120;
         case 4:
-            return 150;
+            return 80;
         case 5:
             return 400;
         default:
@@ -92,35 +92,41 @@
         case 0:
         {
             LWDestroyHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWDestroyHeaderCell class]) forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return  cell;
         }
         case 1:
         {
             LWDestroyAmountTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWDestroyAmountTableViewCell class]) forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.model;
             return  cell;
         }
         case 2:
         {
             LWCirculateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWCirculateTableViewCell class]) forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.model;
             return  cell;
         }
         case 3:
         {
             LWRewardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWRewardTableViewCell class]) forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.model;
             return  cell;
         }
         case 4:
         {
             LWLockTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWLockTableViewCell class]) forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.model;
             return  cell;
         }
         case 5:
         {
             LWEnergyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWEnergyTableViewCell class]) forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.model;
             return  cell;
         }
@@ -128,6 +134,7 @@
         default:
         {
             LWEnergyBottomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWEnergyBottomTableViewCell class]) forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.model;
             return  cell;
         }

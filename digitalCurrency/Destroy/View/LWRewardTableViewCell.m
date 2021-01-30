@@ -63,7 +63,7 @@
         [self.containerView addSubview:self.totalInvestAmountLabel];
         [self.totalInvestAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.totalInvestTitleLabel);
-            make.top.mas_equalTo(self.totalInvestTitleLabel.mas_bottom).offset(20);
+            make.top.mas_equalTo(self.totalInvestTitleLabel.mas_bottom).offset(10);
         }];
         
         self.myInvestTitleLabel = [[UILabel alloc] init];
@@ -97,7 +97,7 @@
         self.openSourceTitleLabel = [[UILabel alloc] init];
         self.openSourceTitleLabel.text = @"公开开源";
         self.openSourceTitleLabel.font = [UIFont systemFontOfSize:11];
-        self.openSourceTitleLabel.textColor = [UIColor colorWithHexString:@"#848484"];
+        self.openSourceTitleLabel.textColor = [UIColor colorWithHexString:@"#F88D02"];
         [self.containerView addSubview:self.openSourceTitleLabel];
         [self.openSourceTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.openSourceImageView);
@@ -112,7 +112,7 @@
         [self.containerView addSubview:self.ownedATOTitleLabel];
         [self.ownedATOTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.totalInvestTitleLabel);
-            make.top.mas_equalTo(self.totalInvestTitleLabel.mas_bottom).offset(20);
+            make.top.mas_equalTo(self.totalInvestAmountLabel.mas_bottom).offset(20);
         }];
         
         self.ownedATOAmountLabel = [[UILabel alloc] init];
@@ -161,7 +161,7 @@
     _model = model;
     self.totalInvestAmountLabel.text = _model.totalExchange;
     self.myInvestAmountLabel.text = _model.myValue;
-    self.ownedATOTitleLabel.text = _model.bonusMoney;
+    self.ownedATOAmountLabel.text = _model.bonusMoney;
     self.surplusATOAmountLabel.text = _model.lessBonusMoney;
     
 }

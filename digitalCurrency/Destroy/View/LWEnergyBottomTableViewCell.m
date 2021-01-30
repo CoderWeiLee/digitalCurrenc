@@ -72,7 +72,7 @@
         [self.containerView addSubview:self.myAmountLabel];
         [self.myAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.ownAmountLabel);
-            make.top.mas_equalTo(self.myTitleLabel.mas_bottom).offset(8);
+            make.centerX.mas_equalTo(self.myTitleLabel);
         }];
     }
     return self;
@@ -86,6 +86,11 @@
 
 - (void)setModel:(WWWWModel *)model {
     _model = model;
+    self.ownAmountLabel.text = _model.staticMoney;
+    NSMutableAttributedString *myAmountStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@u", _model.dynamicMoney]];
+    [myAmountStr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} range:NSMakeRange(0, myAmountStr.length - 1)];
+    [myAmountStr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} range:NSMakeRange(myAmountStr.length-1, 1)];
+    self.myAmountLabel.attributedText = myAmountStr;
 }
 
 @end

@@ -86,6 +86,8 @@
 
 - (void)setModel:(WWWWModel *)model {
     _model = model;
+    self.lockAmountLabel.text = _model.lockMoney;
+    self.releaseAmountLabel.text = _model.unLockMoney;
 }
 
 @end
