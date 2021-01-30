@@ -33,7 +33,7 @@
 @implementation LWRewardTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.contentView.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
+        self.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
         self.containerView = [[UIView alloc] init];
         self.containerView.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.containerView.layer.cornerRadius = 5;
@@ -63,7 +63,7 @@
         [self.containerView addSubview:self.totalInvestAmountLabel];
         [self.totalInvestAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.totalInvestTitleLabel);
-            make.top.mas_equalTo(self.totalInvestTitleLabel.mas_bottom).offset(8);
+            make.top.mas_equalTo(self.totalInvestTitleLabel.mas_bottom).offset(20);
         }];
         
         self.myInvestTitleLabel = [[UILabel alloc] init];
@@ -89,8 +89,9 @@
         self.openSourceImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"opensource"]];
         [self.containerView addSubview:self.openSourceImageView];
         [self.openSourceImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.myInvestTitleLabel);
-            make.right.mas_equalTo(self.containerView).offset(-11);
+            make.centerY.mas_equalTo(self.myInvestTitleLabel).offset(-1.5);
+            make.right.mas_equalTo(self.containerView).offset(-30);
+            make.width.height.equalTo(@16);
         }];
         
         self.openSourceTitleLabel = [[UILabel alloc] init];

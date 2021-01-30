@@ -17,7 +17,7 @@
 @implementation LWDestroyHeaderCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-            self.contentView.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
+            self.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
             self.logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"destroyLogo"]];
             [self.contentView addSubview:self.logoImgView];
             [self.logoImgView mas_makeConstraints:^(MASConstraintMaker *make) {

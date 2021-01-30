@@ -29,10 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationItem.title = @"销毁交易";
     self.view.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
     self.navigationController.navigationBar.hidden = YES;
     self.tableView = [[UITableView alloc]init];
+    self.tableView.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -132,5 +132,9 @@
             return  cell;
         }
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 @end

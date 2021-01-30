@@ -11,7 +11,7 @@
 @interface LWEnergyTableViewCell()
 //容器视图
 @property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIView *energyImageView;
+@property (nonatomic, strong) UIImageView *energyImageView;
 @property (nonatomic, strong) UILabel *expLabel1;
 @property (nonatomic, strong) UILabel *expLabel2;
 @property (nonatomic, strong) UILabel *expLabel3;
@@ -25,10 +25,12 @@
 @implementation LWEnergyTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.contentView.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
+        self.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
         self.containerView = [[UIView alloc] init];
-        self.containerView.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+        self.containerView.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
         self.containerView.layer.cornerRadius = 5;
+        self.containerView.layer.borderColor = [UIColor colorWithWhite:1 alpha:0.3].CGColor;
+        self.containerView.layer.borderWidth  = 0.5;
         self.containerView.layer.masksToBounds = YES;
         [self.contentView addSubview:self.containerView];
         [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -38,11 +40,27 @@
             make.bottom.mas_equalTo(self.contentView).offset(-10);
         }];
         
-        self.energyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"energy"]];
+        //加载GIF
+        NSURL *fileUrl = [[NSBundle mainBundle] URLForResource:@"powerPool" withExtension:@"gif"];
+        //将GIF图片转换成对应的图片源
+        CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)fileUrl, NULL);
+        size_t frameCout = CGImageSourceGetCount(gifSource);//获取其中图片源个数，即由多少帧图片组成
+        NSMutableArray* frames=[[NSMutableArray alloc] init];//定义数组存储拆分出来的图片
+        for (size_t i = 0; i < frameCout; i++) {
+            CGImageRef imageRef=CGImageSourceCreateImageAtIndex(gifSource, i, NULL);//从GIF图片中取出源图片
+            UIImage* imageName=[UIImage imageWithCGImage:imageRef];//将图片源转换成UIimageView能使用的图片源
+            [frames addObject:imageName];//将图片加入数组中
+            CGImageRelease(imageRef);
+        }
+        self.energyImageView = [[UIImageView alloc] init];
+        self.energyImageView.animationImages = frames;//将图片数组加入UIImageView动画数组中
+        [self.energyImageView startAnimating];
         [self.containerView addSubview:self.energyImageView];
         [self.energyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.containerView).offset(11);
             make.centerX.mas_equalTo(self.containerView);
+            make.width.mas_equalTo(@230);
+            make.height.mas_equalTo(@154);
         }];
         
         self.expLabel1 = [[UILabel alloc] init];
@@ -209,6 +227,7 @@
 
 - (void)setModel:(WWWWModel *)model {
     _model = model;
+//    [self.energyImageView ]
 }
 
 @end
