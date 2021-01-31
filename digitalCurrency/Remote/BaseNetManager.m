@@ -162,9 +162,16 @@
             }];
         }
         else if ([BaseNetManager showResponseCode:response] > 399 && [BaseNetManager showResponseCode:response] < 500){
+            id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                resultBlock(result,0);
+            }];
         }
         else{
-            
+            id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                resultBlock(result,0);
+            }];
         }
     }];
     [task resume];

@@ -20,9 +20,13 @@
 #import "LWLockTableViewCell.h"
 #import "LWEnergyTableViewCell.h"
 #import "LWEnergyBottomTableViewCell.h"
+#import <AFNetworking/AFNetworking.h>
+#import "WWWWListModel.h"
+#import "MBProgressHUD.h"
 @interface wwwwwViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) WWWWModel *model;
+@property (nonatomic, strong) WWWWListModel *listModel;
 @end
 
 @implementation wwwwwViewController
@@ -48,10 +52,22 @@
     [self.tableView registerClass:[LWLockTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWLockTableViewCell class])];
     [self.tableView registerClass:[LWEnergyTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWEnergyTableViewCell class])];
     [self.tableView registerClass:[LWEnergyBottomTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWEnergyBottomTableViewCell class])];
+    [self refresh];
+}
+
+- (void)refresh {
     [BaseNetManager requestWithPost:@"http://12345.abc.tm/device/index/info" header:@{@"token": [YLUserInfo shareUserInfo].token} parameters:nil successBlock:^(NSDictionary *resultObject, int isSuccessed) {
         if ([resultObject[@"message"] isEqualToString:@"success"]) {
             self.model = [WWWWModel mj_objectWithKeyValues:resultObject[@"data"]];
             [self.tableView reloadData];
+        }
+    }];
+    
+    //1.获取矿机列表
+    [BaseNetManager requestWithGET:@"device/index/list" parameters:nil successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+        if ([resultObject[@"message"] isEqualToString:@"success"]) {
+            self.listModel = [WWWWListModel mj_objectWithKeyValues:resultObject[@"data"][0]];
+            NSLog(@"111");
         }
     }];
 }
@@ -128,6 +144,15 @@
             LWEnergyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWEnergyTableViewCell class]) forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.model;
+            cell.listModel = self.listModel;
+            cell.buySuccessBlock = ^(NSString * _Nonnull msg) {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.label.text = msg;
+                hud.mode = MBProgressHUDModeText;
+                [hud showAnimated:YES];
+                [hud hideAnimated:YES afterDelay:1.0];
+                [self refresh];
+            };
             return  cell;
         }
 

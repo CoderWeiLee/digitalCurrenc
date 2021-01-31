@@ -8,6 +8,7 @@
 #import "LWEnergyTableViewCell.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
+#import "BaseNetManager.h"
 @interface LWEnergyTableViewCell()
 //容器视图
 @property (nonatomic, strong) UIView *containerView;
@@ -287,7 +288,15 @@
 }
 
 - (void)commmitAction:(UIButton *)btn {
-    
+    [BaseNetManager requestWithPost:@"http://12345.abc.tm/device/order/buy_v1"  parameters:@{@"deviceId": self.listModel.ID} successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+        if ([resultObject[@"message"] isEqualToString:@"success"]) {
+            NSLog(@"111");
+        }else {
+            if (self.buySuccessBlock != nil) {
+                self.buySuccessBlock(resultObject[@"message"]);
+            }
+        }
+    }];
 }
 
 
