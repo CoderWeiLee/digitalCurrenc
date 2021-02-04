@@ -584,6 +584,7 @@
 		D0F2073A25BBFE100032B17D /* LWLockTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2073925BBFE100032B17D /* LWLockTableViewCell.m */; };
 		D0F2073E25BC0EA40032B17D /* LWEnergyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2073D25BC0EA40032B17D /* LWEnergyTableViewCell.m */; };
 		D0F2074225BC363B0032B17D /* LWEnergyBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */; };
+		D0FE1B5D25CBF0EC008C37C2 /* LWCloudLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1567,6 +1568,8 @@
 		D0F2073D25BC0EA40032B17D /* LWEnergyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWEnergyTableViewCell.m; sourceTree = "<group>"; };
 		D0F2074025BC363B0032B17D /* LWEnergyBottomTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWEnergyBottomTableViewCell.h; sourceTree = "<group>"; };
 		D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWEnergyBottomTableViewCell.m; sourceTree = "<group>"; };
+		D0FE1B5B25CBF0EC008C37C2 /* LWCloudLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWCloudLoginViewController.h; sourceTree = "<group>"; };
+		D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWCloudLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1757,6 +1760,8 @@
 				3A794959258F158C00595623 /* SettingUpdateFormCell.h */,
 				3A794958258F158C00595623 /* SettingUpdateFormCell.m */,
 				3A794954258F156900595623 /* SettingUpdateHeaderView.m */,
+				D0FE1B5B25CBF0EC008C37C2 /* LWCloudLoginViewController.h */,
+				D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */,
 				3A79494F258F14B800595623 /* EmptyView */,
 				3A79493A258F13CA00595623 /* tool */,
 				3A794922258F138200595623 /* BaseUIkit */,
@@ -3974,6 +3979,7 @@
 				9241BB6F25469DA700FF2FFB /* Y_KLineMAView.m in Sources */,
 				9241BCC725469DA800FF2FFB /* FSSegmentTitleView.m in Sources */,
 				3A7948B7258F11DF00595623 /* FFRegisteredParamsModel.m in Sources */,
+				D0FE1B5D25CBF0EC008C37C2 /* LWCloudLoginViewController.m in Sources */,
 				9241BBA525469DA700FF2FFB /* SocketUtils.m in Sources */,
 				9241BCB125469DA800FF2FFB /* FrenchCurrencyViewController.m in Sources */,
 				9241BB6325469DA700FF2FFB /* AnimationContoller.m in Sources */,

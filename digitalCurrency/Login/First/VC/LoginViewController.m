@@ -13,7 +13,7 @@
 #import "FFImportAccountViewController.h"
 #import "RegisteredViewController.h"
 #import "FFAcountManager.h"
- 
+#import "LWCloudLoginViewController.h"
 @interface LoginViewController ()<LoginViewDelegate>
 {
     LoginView *_loginView;
@@ -139,6 +139,11 @@
 - (void)improtAccountClick{
     FFImportAccountViewController *fvc = [FFImportAccountViewController new];
     [self.navigationController pushViewController:fvc animated:YES];
+}
+
+- (void)cloudLoginClick {
+    LWCloudLoginViewController *cloudLoginVc = [[LWCloudLoginViewController alloc] init];
+    [self.navigationController pushViewController:cloudLoginVc animated:YES];
 }
 
 
