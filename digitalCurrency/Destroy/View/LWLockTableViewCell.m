@@ -22,6 +22,7 @@
 @implementation LWLockTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
         self.containerView = [[UIView alloc] init];
         self.containerView.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.containerView.layer.cornerRadius = 5;
@@ -85,6 +86,8 @@
 
 - (void)setModel:(WWWWModel *)model {
     _model = model;
+    self.lockAmountLabel.text = _model.lockMoney;
+    self.releaseAmountLabel.text = _model.unLockMoney;
 }
 
 @end

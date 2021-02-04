@@ -8,10 +8,11 @@
 #import "LWEnergyTableViewCell.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
+#import "BaseNetManager.h"
 @interface LWEnergyTableViewCell()
 //容器视图
 @property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIView *energyImageView;
+@property (nonatomic, strong) UIImageView *energyImageView;
 @property (nonatomic, strong) UILabel *expLabel1;
 @property (nonatomic, strong) UILabel *expLabel2;
 @property (nonatomic, strong) UILabel *expLabel3;
@@ -25,9 +26,12 @@
 @implementation LWEnergyTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
         self.containerView = [[UIView alloc] init];
-        self.containerView.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+        self.containerView.backgroundColor = [UIColor colorWithRed:16.0 / 255.0 green:16.0 / 255.0 blue:16.0 / 255.0 alpha:1];
         self.containerView.layer.cornerRadius = 5;
+        self.containerView.layer.borderColor = [UIColor colorWithWhite:1 alpha:0.3].CGColor;
+        self.containerView.layer.borderWidth  = 0.5;
         self.containerView.layer.masksToBounds = YES;
         [self.contentView addSubview:self.containerView];
         [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -37,11 +41,27 @@
             make.bottom.mas_equalTo(self.contentView).offset(-10);
         }];
         
-        self.energyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"energy"]];
+        //加载GIF
+        NSURL *fileUrl = [[NSBundle mainBundle] URLForResource:@"powerPool" withExtension:@"gif"];
+        //将GIF图片转换成对应的图片源
+        CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)fileUrl, NULL);
+        size_t frameCout = CGImageSourceGetCount(gifSource);//获取其中图片源个数，即由多少帧图片组成
+        NSMutableArray* frames=[[NSMutableArray alloc] init];//定义数组存储拆分出来的图片
+        for (size_t i = 0; i < frameCout; i++) {
+            CGImageRef imageRef=CGImageSourceCreateImageAtIndex(gifSource, i, NULL);//从GIF图片中取出源图片
+            UIImage* imageName=[UIImage imageWithCGImage:imageRef];//将图片源转换成UIimageView能使用的图片源
+            [frames addObject:imageName];//将图片加入数组中
+            CGImageRelease(imageRef);
+        }
+        self.energyImageView = [[UIImageView alloc] init];
+        self.energyImageView.animationImages = frames;//将图片数组加入UIImageView动画数组中
+        self.energyImageView.animationDuration = 10;
         [self.containerView addSubview:self.energyImageView];
         [self.energyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.containerView).offset(11);
             make.centerX.mas_equalTo(self.containerView);
+            make.width.mas_equalTo(@230);
+            make.height.mas_equalTo(@154);
         }];
         
         self.expLabel1 = [[UILabel alloc] init];
@@ -103,7 +123,7 @@
         [self.btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn2.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn2.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn2.layer.cornerRadius = 3;
         self.btn2.layer.masksToBounds = YES;
         [self.btn2 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -122,7 +142,7 @@
         [self.btn3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn3.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn3.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn3.layer.cornerRadius = 3;
         self.btn3.layer.masksToBounds = YES;
         [self.btn3 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -141,7 +161,7 @@
         [self.btn4 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn4 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn4.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn4.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn4.layer.cornerRadius = 4;
         self.btn4.layer.masksToBounds = YES;
         [self.btn4 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -160,7 +180,7 @@
         [self.btn5 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btn5 setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         self.btn5.titleLabel.font = [UIFont systemFontOfSize:15];
-        self.btn5.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+        self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
         self.btn5.layer.cornerRadius = 3;
         self.btn5.layer.masksToBounds = YES;
         [self.btn5 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -193,11 +213,90 @@
 }
 
 - (void)btnAction:(UIButton *)btn {
-    
+    switch (btn.tag) {
+        case 1:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn1.selected = YES;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        case 2:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn2.selected = YES;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        case 3:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn3.selected = YES;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        case 4:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn4.selected = YES;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn5.selected = NO;
+            break;
+        }
+        default:
+        {
+            self.btn1.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn1.selected = NO;
+            self.btn2.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn2.selected = NO;
+            self.btn3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn3.selected = NO;
+            self.btn4.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+            self.btn4.selected = NO;
+            self.btn5.backgroundColor = [UIColor colorWithHexString:@"#F68D25"];
+            self.btn5.selected = YES;
+            break;
+        }
+    }
 }
 
 - (void)commmitAction:(UIButton *)btn {
-    
+    [BaseNetManager requestWithPost:@"http://12345.abc.tm/device/order/buy_v1"  parameters:@{@"deviceId": self.listModel.ID} successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+        if ([resultObject[@"message"] isEqualToString:@"success"]) {
+            NSLog(@"111");
+        }else {
+            if (self.buySuccessBlock != nil) {
+                self.buySuccessBlock(resultObject[@"message"]);
+            }
+        }
+    }];
 }
 
 
@@ -208,6 +307,7 @@
 
 - (void)setModel:(WWWWModel *)model {
     _model = model;
+    [self.energyImageView startAnimating];
 }
 
 @end

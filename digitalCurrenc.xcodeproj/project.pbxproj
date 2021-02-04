@@ -573,9 +573,10 @@
 		CA735E3625AB3F1D00B605AC /* DCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA735E3525AB3F1D00B605AC /* DCExtensions.swift */; };
 		CA76CB7A25A9D45000F0154E /* DCDistroyDealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA76CB7925A9D45000F0154E /* DCDistroyDealVC.swift */; };
 		CA76CB7E25A9D45900F0154E /* DCDistroyDealVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA76CB7D25A9D45900F0154E /* DCDistroyDealVC.storyboard */; };
+		D023730925C64ECC0009E4CB /* WWWWListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D023730825C64ECC0009E4CB /* WWWWListModel.m */; };
 		D06C81DA25C3EF7800380C73 /* WWWWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D06C81D925C3EF7800380C73 /* WWWWModel.m */; };
 		D06C81DD25C3F38A00380C73 /* powerPool.gif in Resources */ = {isa = PBXBuildFile; fileRef = D06C81DC25C3F38A00380C73 /* powerPool.gif */; };
-		D0F206F225BAB3350032B17D /* LWDestroyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */; };
+		D0F206F225BAB3350032B17D /* LWDestroyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */; };
 		D0F2071B25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2071A25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m */; };
 		D0F2072025BAC4F50032B17D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2071F25BAC4F50032B17D /* UIColor+Hex.m */; };
 		D0F2072425BAD4250032B17D /* LWRewardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2072325BAD4250032B17D /* LWRewardTableViewCell.m */; };
@@ -1545,11 +1546,13 @@
 		CA735E3525AB3F1D00B605AC /* DCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCExtensions.swift; sourceTree = "<group>"; };
 		CA76CB7925A9D45000F0154E /* DCDistroyDealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCDistroyDealVC.swift; sourceTree = "<group>"; };
 		CA76CB7D25A9D45900F0154E /* DCDistroyDealVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DCDistroyDealVC.storyboard; sourceTree = "<group>"; };
+		D023730725C64ECC0009E4CB /* WWWWListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WWWWListModel.h; sourceTree = "<group>"; };
+		D023730825C64ECC0009E4CB /* WWWWListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWWListModel.m; sourceTree = "<group>"; };
 		D06C81D825C3EF7800380C73 /* WWWWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WWWWModel.h; sourceTree = "<group>"; };
 		D06C81D925C3EF7800380C73 /* WWWWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWWModel.m; sourceTree = "<group>"; };
 		D06C81DC25C3F38A00380C73 /* powerPool.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = powerPool.gif; sourceTree = "<group>"; };
-		D0F206F025BAB3350032B17D /* LWDestroyHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyHeaderView.h; sourceTree = "<group>"; };
-		D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWDestroyHeaderView.m; sourceTree = "<group>"; };
+		D0F206F025BAB3350032B17D /* LWDestroyHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyHeaderCell.h; sourceTree = "<group>"; };
+		D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWDestroyHeaderCell.m; sourceTree = "<group>"; };
 		D0F2071925BAC2CE0032B17D /* LWDestroyAmountTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWDestroyAmountTableViewCell.h; sourceTree = "<group>"; };
 		D0F2071A25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWDestroyAmountTableViewCell.m; sourceTree = "<group>"; };
 		D0F2071E25BAC4F50032B17D /* UIColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -2065,6 +2068,8 @@
 				9241BB4E25469DA700FF2FFB /* Info.plist */,
 				D06C81D825C3EF7800380C73 /* WWWWModel.h */,
 				D06C81D925C3EF7800380C73 /* WWWWModel.m */,
+				D023730725C64ECC0009E4CB /* WWWWListModel.h */,
+				D023730825C64ECC0009E4CB /* WWWWListModel.m */,
 				92419129254AD2750020F25C /* wwwwwViewController.h */,
 				9241912A254AD2750020F25C /* wwwwwViewController.m */,
 			);
@@ -3599,8 +3604,8 @@
 		D0F206ED25BAB2C70032B17D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D0F206F025BAB3350032B17D /* LWDestroyHeaderView.h */,
-				D0F206F125BAB3350032B17D /* LWDestroyHeaderView.m */,
+				D0F206F025BAB3350032B17D /* LWDestroyHeaderCell.h */,
+				D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */,
 				D0F2071925BAC2CE0032B17D /* LWDestroyAmountTableViewCell.h */,
 				D0F2071A25BAC2CE0032B17D /* LWDestroyAmountTableViewCell.m */,
 				D0F2072625BAD4DA0032B17D /* LWCirculateTableViewCell.h */,
@@ -4004,6 +4009,7 @@
 				92044D2525610B4500B53A1A /* AsyncTaskButton.m in Sources */,
 				9241BB7B25469DA700FF2FFB /* Y_KLineVolume.m in Sources */,
 				9241BD0025469DA800FF2FFB /* tradeCell.m in Sources */,
+				D023730925C64ECC0009E4CB /* WWWWListModel.m in Sources */,
 				9241BBE925469DA700FF2FFB /* PaymentAccountViewController.m in Sources */,
 				D0F2072825BAD4DA0032B17D /* LWCirculateTableViewCell.m in Sources */,
 				9241912B254AD2750020F25C /* wwwwwViewController.m in Sources */,
@@ -4126,7 +4132,7 @@
 				3A794902258F12CE00595623 /* YYTextMagnifier.m in Sources */,
 				9241BB7225469DA700FF2FFB /* Y_VolumeMAView.m in Sources */,
 				9241BC6B25469DA800FF2FFB /* AactionCollectionViewCell.m in Sources */,
-				D0F206F225BAB3350032B17D /* LWDestroyHeaderView.m in Sources */,
+				D0F206F225BAB3350032B17D /* LWDestroyHeaderCell.m in Sources */,
 				9241BBCD25469DA700FF2FFB /* MyCommissionModel.m in Sources */,
 				9241BBDB25469DA700FF2FFB /* ChatModel.m in Sources */,
 				3A794972258F177B00595623 /* AESCipher.m in Sources */,
