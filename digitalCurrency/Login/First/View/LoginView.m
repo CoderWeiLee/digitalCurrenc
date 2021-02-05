@@ -76,12 +76,8 @@
     }];
     
     [_cloudLoginBtn addBlockForControlEvents:UIControlEventTouchUpInside block:^(id  _Nonnull sender) {
-        if (self->_cloudLoginBtn.isSelected) {
-            if ([self.delegate respondsToSelector:@selector(cloudLoginClick)]) {
-                [self.delegate cloudLoginClick];
-            }
-        }else {
-            
+        if ([self.delegate respondsToSelector:@selector(cloudLoginClick)]) {
+            [self.delegate cloudLoginClick];
         }
     }];
     
