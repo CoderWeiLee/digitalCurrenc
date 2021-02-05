@@ -125,28 +125,25 @@
         make.top.mas_equalTo(line2.mas_bottom);
     }];
     
-    self.boxInputView = [[CRBoxInputView alloc] initWithCodeLength:11];
-    self.boxInputView.mainCollectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    self.boxInputView.boxFlowLayout.itemSize = CGSizeMake(52, 52);
     CRBoxInputCellProperty *cellProperty = [CRBoxInputCellProperty new];
-    cellProperty.cellCursorColor = [UIColor whiteColor];
+    cellProperty.cellCursorColor = [UIColor colorWithHexString:@"#FFECEC"];
     cellProperty.cellCursorWidth = 2;
     cellProperty.cellCursorHeight = 27;
     cellProperty.cornerRadius = 0;
     cellProperty.borderWidth = 0;
     cellProperty.cellFont = [UIFont boldSystemFontOfSize:24];
-    cellProperty.cellTextColor = [UIColor colorWithWhite:0.5 alpha:1];
-    cellProperty.showLine = YES; //必需
+    cellProperty.cellTextColor = [UIColor systemPinkColor];
+    cellProperty.showLine = YES;
     cellProperty.customLineViewBlock = ^CRLineView * _Nonnull{
         CRLineView *lineView = [CRLineView new];
         lineView.underlineColorNormal = [UIColor redColor];
-        lineView.underlineColorSelected = [UIColor yellowColor];
-        lineView.underlineColorFilled = [UIColor greenColor];
+        lineView.underlineColorSelected = [UIColor greenColor];
+        lineView.underlineColorFilled = [UIColor yellowColor];
         [lineView.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(4);
             make.left.right.bottom.offset(0);
         }];
-
+        
         lineView.selectChangeBlock = ^(CRLineView * _Nonnull lineView, BOOL selected) {
             if (selected) {
                 [lineView.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -158,12 +155,14 @@
                 }];
             }
         };
-        
+
         return lineView;
-    }; //可选
+    };
+
+    self.boxInputView = [[CRBoxInputView alloc] initWithCodeLength:4];
+    self.boxInputView.mainCollectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    self.boxInputView.boxFlowLayout.itemSize = CGSizeMake(52, 52);
     self.boxInputView.customCellProperty = cellProperty;
-    self.boxInputView.backgroundColor = [UIColor clearColor];
-    self.boxInputView.keyBoardType = UIKeyboardTypeNumberPad;
     [self.boxInputView loadAndPrepareViewWithBeginEdit:YES];
     [self.view addSubview:self.boxInputView];
     [self.boxInputView mas_makeConstraints:^(MASConstraintMaker *make) {
