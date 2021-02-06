@@ -575,6 +575,7 @@
 		CA76CB7E25A9D45900F0154E /* DCDistroyDealVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA76CB7D25A9D45900F0154E /* DCDistroyDealVC.storyboard */; };
 		D023730925C64ECC0009E4CB /* WWWWListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D023730825C64ECC0009E4CB /* WWWWListModel.m */; };
 		D038354625CEAB00006BC31D /* LWCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D038354525CEAB00006BC31D /* LWCodeViewController.m */; };
+		D038357325CEC778006BC31D /* LWSelectAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D038357225CEC778006BC31D /* LWSelectAreaViewController.m */; };
 		D06C81DA25C3EF7800380C73 /* WWWWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D06C81D925C3EF7800380C73 /* WWWWModel.m */; };
 		D06C81DD25C3F38A00380C73 /* powerPool.gif in Resources */ = {isa = PBXBuildFile; fileRef = D06C81DC25C3F38A00380C73 /* powerPool.gif */; };
 		D0F206F225BAB3350032B17D /* LWDestroyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */; };
@@ -1552,6 +1553,8 @@
 		D023730825C64ECC0009E4CB /* WWWWListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWWListModel.m; sourceTree = "<group>"; };
 		D038354425CEAB00006BC31D /* LWCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWCodeViewController.h; sourceTree = "<group>"; };
 		D038354525CEAB00006BC31D /* LWCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWCodeViewController.m; sourceTree = "<group>"; };
+		D038357125CEC778006BC31D /* LWSelectAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSelectAreaViewController.h; sourceTree = "<group>"; };
+		D038357225CEC778006BC31D /* LWSelectAreaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSelectAreaViewController.m; sourceTree = "<group>"; };
 		D06C81D825C3EF7800380C73 /* WWWWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WWWWModel.h; sourceTree = "<group>"; };
 		D06C81D925C3EF7800380C73 /* WWWWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWWModel.m; sourceTree = "<group>"; };
 		D06C81DC25C3F38A00380C73 /* powerPool.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = powerPool.gif; sourceTree = "<group>"; };
@@ -1767,6 +1770,8 @@
 				D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */,
 				D038354425CEAB00006BC31D /* LWCodeViewController.h */,
 				D038354525CEAB00006BC31D /* LWCodeViewController.m */,
+				D038357125CEC778006BC31D /* LWSelectAreaViewController.h */,
+				D038357225CEC778006BC31D /* LWSelectAreaViewController.m */,
 				3A79494F258F14B800595623 /* EmptyView */,
 				3A79493A258F13CA00595623 /* tool */,
 				3A794922258F138200595623 /* BaseUIkit */,
@@ -4301,6 +4306,7 @@
 				3A794905258F12CE00595623 /* YYTextInput.m in Sources */,
 				9241BBA025469DA700FF2FFB /* NSDictionary+Log.m in Sources */,
 				9241BBD225469DA700FF2FFB /* SelectBankNameModel.m in Sources */,
+				D038357325CEC778006BC31D /* LWSelectAreaViewController.m in Sources */,
 				9241BBE525469DA700FF2FFB /* BindBankViewController.m in Sources */,
 				9241BBF125469DA700FF2FFB /* MoneyPasswordViewController.m in Sources */,
 				9241BB6C25469DA700FF2FFB /* Y_StockChartGlobalVariable.m in Sources */,

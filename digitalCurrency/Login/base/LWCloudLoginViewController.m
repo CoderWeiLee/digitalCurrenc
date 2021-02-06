@@ -9,6 +9,7 @@
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
 #import "LWCodeViewController.h"
+#import "LWSelectAreaViewController.h"
 @interface LWCloudLoginViewController ()
 @property (nonatomic, strong) UILabel *countryLabel;
 @property (nonatomic, strong) UILabel *countryCodeLabel;
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) UIButton *switchBtn;
 @property (nonatomic, strong) UILabel *protocolLabel;
 @property (nonatomic, strong) UIButton *protocolBtn;
+@property (nonatomic, strong) UIButton *selectAreaBtn;
 @end
 
 @implementation LWCloudLoginViewController
@@ -98,6 +100,15 @@
         make.left.mas_equalTo(self.view).offset(15);
         make.right.mas_equalTo(self.view).offset(-15);
         make.top.mas_equalTo(self.countryLabel.mas_bottom).offset(17.5);
+    }];
+    
+    //添加选择地区的按钮
+    self.selectAreaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.selectAreaBtn addTarget:self action:@selector(selectAreaAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.selectAreaBtn];
+    [self.selectAreaBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(line1);
+        make.bottom.mas_equalTo(line2);
     }];
     
     self.countryCodeLabel = [[UILabel alloc] init];
@@ -210,5 +221,12 @@
 #pragma mark - 用户协议的点击
 - (void)protocolAction {
     
+}
+
+#pragma mark - 选择地区
+- (void)selectAreaAction {
+    LWSelectAreaViewController *selectVc = [[LWSelectAreaViewController alloc] init];
+    selectVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:selectVc animated:YES];
 }
 @end
