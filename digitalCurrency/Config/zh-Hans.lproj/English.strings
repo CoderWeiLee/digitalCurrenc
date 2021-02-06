@@ -41,6 +41,8 @@
 "inputNewPhoneNum" = "请输入新手机号码";
 "inputLoginPassword" = "请输入登录密码";
 "inputCode" = "请输入验证码";
+"enterCode" = "输入验证码";
+"codeSended" = "验证码已发送至";
 "inputEmailAccount" = "请输入邮箱账号";
 "inputEmailValidate" = "请输入邮箱验证码";
 "inputEmailValidateRight" = "请正确输入邮箱账号";

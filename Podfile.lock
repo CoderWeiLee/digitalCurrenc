@@ -16,6 +16,8 @@ PODS:
     - AFNetworking/NSURLSession
   - Bugly (2.5.5)
   - CocoaAsyncSocket (7.6.4)
+  - CRBoxInputView (1.2.1):
+    - Masonry
   - FLAnimatedImage (1.0.12)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -60,6 +62,7 @@ DEPENDENCIES:
   - AFNetworking
   - Bugly (= 2.5.5)
   - CocoaAsyncSocket
+  - CRBoxInputView
   - FLAnimatedImage (~> 1.0.12)
   - FMDB
   - IQKeyboardManager
@@ -85,6 +88,7 @@ SPEC REPOS:
     - AFNetworking
     - Bugly
     - CocoaAsyncSocket
+    - CRBoxInputView
     - FLAnimatedImage
     - FMDB
     - IQKeyboardManager
@@ -120,6 +124,7 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Bugly: eded937bbb1f731cacf689c2d934ddbd9ab34f83
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  CRBoxInputView: d73a630e5326ee70487b4a56d09daebf915d82fd
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
@@ -143,6 +148,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 5125491fa7a7b741a185752b85f20464aea48032
+PODFILE CHECKSUM: 5df9f5169bc9d6110b58ae2489eef4a788828ae0
 
 COCOAPODS: 1.10.1

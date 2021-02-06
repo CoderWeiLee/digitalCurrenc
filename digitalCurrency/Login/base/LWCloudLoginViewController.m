@@ -8,6 +8,7 @@
 #import "LWCloudLoginViewController.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
+#import "LWCodeViewController.h"
 @interface LWCloudLoginViewController ()
 @property (nonatomic, strong) UILabel *countryLabel;
 @property (nonatomic, strong) UILabel *countryCodeLabel;
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) UIButton *nextBtn;
 @property (nonatomic, strong) UIButton *switchBtn;
 @property (nonatomic, strong) UILabel *protocolLabel;
+@property (nonatomic, strong) UIButton *protocolBtn;
 @end
 
 @implementation LWCloudLoginViewController
@@ -168,13 +170,20 @@
     self.protocolLabel = [[UILabel alloc] init];
     NSMutableAttributedString *protocolStr = [[NSMutableAttributedString alloc] initWithString:@"登录即代表您同意 《用户注册协议》"];
     [protocolStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, protocolStr.length)];
-    [protocolStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(0, 7)];
-    [protocolStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(7, protocolStr.length-7)];
+    [protocolStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(0, 8)];
+    [protocolStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(8, protocolStr.length-8)];
     self.protocolLabel.attributedText = protocolStr;
     [self.view addSubview:self.protocolLabel];
     [self.protocolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view).offset(-44);
+    }];
+    
+    self.protocolBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.protocolBtn addTarget:self action:@selector(protocolAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.protocolBtn];
+    [self.protocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.protocolLabel);
     }];
 }
 
@@ -188,11 +197,18 @@
 
 #pragma mark - 下一步
 - (void)nextAction {
-    
+    LWCodeViewController *codeVc = [[LWCodeViewController alloc] init];
+    codeVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:codeVc animated:YES];
 }
 
 #pragma mark - 切换注册
 - (void)registerAction {
+    
+}
+
+#pragma mark - 用户协议的点击
+- (void)protocolAction {
     
 }
 @end

@@ -42,6 +42,8 @@
 "inputNewPhoneNum" = "Please enter your new phone number";
 "inputLoginPassword" = "Please enter your login password";
 "inputCode" = "Please enter the verification code";
+"enterCode" = "Enter confirmation code";
+"codeSended" = "Verification code has been sent to";
 "inputEmailAccount" = "Please enter your email account";
 "checkPassword" = "The new password is inconsistent with the confirmation password";
 "warmPrompt" = "warmPrompt";
