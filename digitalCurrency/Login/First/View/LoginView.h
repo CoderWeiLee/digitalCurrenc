@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)forgetPwdClick;
 -(void)popVC;
 
+/// 点击云端登录
+- (void)cloudLoginClick;
 @end
 
 @interface LoginView : BaseUIView

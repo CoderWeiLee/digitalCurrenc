@@ -1787,6 +1787,9 @@
 "578Tip174" = "Pending Order Quantity";
 "578Tip175" = "Actual Transaction";
 "578Tip176" = "Please activate the current account first";
+"578Tip178" = "Cloud Login";
+"578Tip179" = "Your Phone Number";
+"578Tip180" = "Please confirm your area code and enter your mobile number";
 
 "578NOW1" = "Pledge income";
 "578NOW2" = "Promotion revenue";

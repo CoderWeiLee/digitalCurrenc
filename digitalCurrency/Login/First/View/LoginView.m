@@ -21,7 +21,7 @@
     UILabel        *_welcome;
     WTLabel        *_appNameLabel;
     UIButton       *_backButton;
-    WTButton       *_createAccountButton,*_improtAccountButton,*_protocolButton;
+    WTButton       *_createAccountButton,*_improtAccountButton,*_protocolButton, *_cloudLoginBtn; //新增云端登录也就是手机号登录
     FFProtocolTextView *_protocolTextView;
     WTButton       *_switchLanaguageButton;
 }
@@ -73,6 +73,12 @@
 //            printAlert(LocalizationKey(@"578Tip161"), 1.f);
         }
 
+    }];
+    
+    [_cloudLoginBtn addBlockForControlEvents:UIControlEventTouchUpInside block:^(id  _Nonnull sender) {
+        if ([self.delegate respondsToSelector:@selector(cloudLoginClick)]) {
+            [self.delegate cloudLoginClick];
+        }
     }];
     
     [_protocolButton addBlockForControlEvents:UIControlEventTouchUpInside block:^(UIButton *sender) {
@@ -138,6 +144,12 @@
     _improtAccountButton.layer.cornerRadius = 22;
     _improtAccountButton.layer.masksToBounds = YES;
     
+    //云端登录按钮
+    _cloudLoginBtn = [[WTButton alloc] initWithFrame:CGRectZero titleStr:LocalizationKey(@"578Tip178") titleFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] titleColor:KWhiteColor parentView:_scrollView];
+    _cloudLoginBtn.backgroundColor = [UIColor orangeColor];
+    _cloudLoginBtn.layer.cornerRadius = 22;
+    _cloudLoginBtn.layer.masksToBounds = YES;
+    
     _protocolButton = [[WTButton alloc] initWithFrame:CGRectZero buttonImage:[UIImage imageNamed:@"Unselected"] selectedImage:[UIImage imageNamed:@"zhglxz"] parentView:_scrollView];
     _protocolButton.selected = YES;
     _protocolButton.hidden = YES;
@@ -158,6 +170,8 @@
     _createAccountButton.frame = CGRectMake(ScreenWidth * 0.05, self.centerY - 80 , ScreenWidth*0.9, 44);
     
     _improtAccountButton.frame = CGRectMake(_createAccountButton.left, _createAccountButton.bottom + 20, _createAccountButton.width, 44);
+    
+    _cloudLoginBtn.frame = CGRectMake(_improtAccountButton.left, _improtAccountButton.bottom + 20, _improtAccountButton.width, 44);
     
 //    [_protocolTextView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.bottom.mas_equalTo(self.mas_bottom).offset(-60);
