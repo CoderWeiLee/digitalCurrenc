@@ -576,6 +576,8 @@
 		D023730925C64ECC0009E4CB /* WWWWListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D023730825C64ECC0009E4CB /* WWWWListModel.m */; };
 		D038354625CEAB00006BC31D /* LWCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D038354525CEAB00006BC31D /* LWCodeViewController.m */; };
 		D038357325CEC778006BC31D /* LWSelectAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D038357225CEC778006BC31D /* LWSelectAreaViewController.m */; };
+		D038357725CEDC60006BC31D /* LWSelectAreaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D038357625CEDC60006BC31D /* LWSelectAreaTableViewCell.m */; };
+		D038357B25CEE02A006BC31D /* LWRecommendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D038357A25CEE02A006BC31D /* LWRecommendListViewController.m */; };
 		D06C81DA25C3EF7800380C73 /* WWWWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D06C81D925C3EF7800380C73 /* WWWWModel.m */; };
 		D06C81DD25C3F38A00380C73 /* powerPool.gif in Resources */ = {isa = PBXBuildFile; fileRef = D06C81DC25C3F38A00380C73 /* powerPool.gif */; };
 		D0F206F225BAB3350032B17D /* LWDestroyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F206F125BAB3350032B17D /* LWDestroyHeaderCell.m */; };
@@ -1555,6 +1557,10 @@
 		D038354525CEAB00006BC31D /* LWCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWCodeViewController.m; sourceTree = "<group>"; };
 		D038357125CEC778006BC31D /* LWSelectAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSelectAreaViewController.h; sourceTree = "<group>"; };
 		D038357225CEC778006BC31D /* LWSelectAreaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSelectAreaViewController.m; sourceTree = "<group>"; };
+		D038357525CEDC60006BC31D /* LWSelectAreaTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSelectAreaTableViewCell.h; sourceTree = "<group>"; };
+		D038357625CEDC60006BC31D /* LWSelectAreaTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSelectAreaTableViewCell.m; sourceTree = "<group>"; };
+		D038357925CEE02A006BC31D /* LWRecommendListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWRecommendListViewController.h; sourceTree = "<group>"; };
+		D038357A25CEE02A006BC31D /* LWRecommendListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWRecommendListViewController.m; sourceTree = "<group>"; };
 		D06C81D825C3EF7800380C73 /* WWWWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WWWWModel.h; sourceTree = "<group>"; };
 		D06C81D925C3EF7800380C73 /* WWWWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWWModel.m; sourceTree = "<group>"; };
 		D06C81DC25C3F38A00380C73 /* powerPool.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = powerPool.gif; sourceTree = "<group>"; };
@@ -1772,6 +1778,10 @@
 				D038354525CEAB00006BC31D /* LWCodeViewController.m */,
 				D038357125CEC778006BC31D /* LWSelectAreaViewController.h */,
 				D038357225CEC778006BC31D /* LWSelectAreaViewController.m */,
+				D038357525CEDC60006BC31D /* LWSelectAreaTableViewCell.h */,
+				D038357625CEDC60006BC31D /* LWSelectAreaTableViewCell.m */,
+				D038357925CEE02A006BC31D /* LWRecommendListViewController.h */,
+				D038357A25CEE02A006BC31D /* LWRecommendListViewController.m */,
 				3A79494F258F14B800595623 /* EmptyView */,
 				3A79493A258F13CA00595623 /* tool */,
 				3A794922258F138200595623 /* BaseUIkit */,
@@ -4166,6 +4176,7 @@
 				9241BCF025469DA800FF2FFB /* commissionViewController.m in Sources */,
 				9241BC8425469DA800FF2FFB /* symbolModel.m in Sources */,
 				9241BC9825469DA800FF2FFB /* KchatViewController.m in Sources */,
+				D038357725CEDC60006BC31D /* LWSelectAreaTableViewCell.m in Sources */,
 				9241BBD425469DA700FF2FFB /* VersionUpdateModel.m in Sources */,
 				9241BC5B25469DA800FF2FFB /* MineTableViewCell.m in Sources */,
 				7045357A2591EB05008EC2FF /* HelpManager.m in Sources */,
@@ -4201,6 +4212,7 @@
 				9241BC6D25469DA800FF2FFB /* MyassetsTableViewCell.m in Sources */,
 				9241BD1625469DA800FF2FFB /* TradeNetManager.m in Sources */,
 				9241BB7E25469DA700FF2FFB /* Y_KLine.m in Sources */,
+				D038357B25CEE02A006BC31D /* LWRecommendListViewController.m in Sources */,
 				9241BB6925469DA700FF2FFB /* ZLAdvertView.m in Sources */,
 				9241BB9925469DA700FF2FFB /* ZLGestureLockViewController.m in Sources */,
 				9241BC8325469DA800FF2FFB /* bannerModel.m in Sources */,

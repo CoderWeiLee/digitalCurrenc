@@ -8,8 +8,9 @@
 #import "LWSelectAreaViewController.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
-@interface LWSelectAreaViewController ()
-
+#import "LWSelectAreaTableViewCell.h"
+@interface LWSelectAreaViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation LWSelectAreaViewController
@@ -36,7 +37,6 @@
         make.centerY.mas_equalTo(titleLabel);
     }];
     
-    //search
     UIButton *rightItem = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightItem setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
     [rightItem addTarget:self action:@selector(searchAction) forControlEvents:UIControlEventTouchUpInside];
@@ -45,6 +45,12 @@
         make.right.mas_equalTo(self.view).offset(-15);
         make.centerY.mas_equalTo(titleLabel);
     }];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, Height_NavBar, self.view.width, self.view.height - Height_NavBar) style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView registerClass:[LWSelectAreaTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWSelectAreaTableViewCell class])];
+    [self.view addSubview:self.tableView];
 }
 
 #pragma mark - 返回上个界面
@@ -57,5 +63,18 @@
    
 }
 
+#pragma mark - UITableViewDataSource & UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LWSelectAreaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWSelectAreaTableViewCell class]) forIndexPath:indexPath];
+    return cell;
+}
 
 @end
