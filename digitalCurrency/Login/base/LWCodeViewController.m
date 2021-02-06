@@ -68,28 +68,32 @@
     
     CRBoxInputCellProperty *cellProperty = [CRBoxInputCellProperty new];
     cellProperty.showLine = YES; //必需
+    //背景颜色
+    cellProperty.cellBgColorNormal = [UIColor clearColor];
+    cellProperty.cellBgColorSelected = [UIColor clearColor];
+    //边框颜色
+    cellProperty.cellBorderColorNormal = [UIColor clearColor];
+    cellProperty.cellBorderColorSelected = [UIColor clearColor];
+    //光标颜色
+    cellProperty.cellCursorColor = [UIColor colorWithHexString:@"#F88D02"];
+    //光标宽度
+    cellProperty.cellCursorWidth = 2;
+    //光标高度
+    cellProperty.cellCursorHeight = 40;
+    //字体颜色
+    cellProperty.cellTextColor = [UIColor whiteColor];
+    //字体大小
+    cellProperty.cellFont = [UIFont systemFontOfSize:40];
     cellProperty.customLineViewBlock = ^CRLineView * _Nonnull{
         CRLineView *lineView = [CRLineView new];
-        lineView.underlineColorNormal = [UIColor colorWithWhite:0.5 alpha:0.3];
-        lineView.underlineColorSelected = [UIColor colorWithWhite:0.5 alpha:0.7];
-        lineView.underlineColorFilled = [UIColor colorWithWhite:0.5 alpha:1];
+        lineView.underlineColorNormal = [UIColor colorWithHexString:@"#1E1E1E"];
+        lineView.underlineColorSelected = [UIColor colorWithHexString:@"#1E1E1E"];
+        lineView.underlineColorFilled = [UIColor colorWithHexString:@"#1E1E1E"];
         [lineView.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(4);
-            make.left.right.bottom.offset(0);
+            make.height.mas_equalTo(1);
+            make.bottom.offset(0);
+            make.width.mas_equalTo(55);
         }];
-
-        lineView.selectChangeBlock = ^(CRLineView * _Nonnull lineView, BOOL selected) {
-            if (selected) {
-                [lineView.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.mas_equalTo(6);
-                }];
-            } else {
-                [lineView.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.mas_equalTo(4);
-                }];
-            }
-        };
-        
         return lineView;
     }; //可选
     self.boxInputView = [[CRBoxInputView alloc] initWithCodeLength:4];
@@ -108,6 +112,7 @@
     [countDownStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, countDownStr.length)];
     [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(0, 3)];
     [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(3, countDownStr.length - 3)];
+    self.countDownLabel.attributedText = countDownStr;
     [self.view addSubview:self.countDownLabel];
     [self.countDownLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
