@@ -26,6 +26,8 @@
             }];
     
             self.chBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.chBtn.tag = 1;
+            [self.chBtn addTarget:self action:@selector(checkLan:) forControlEvents:UIControlEventTouchUpInside];
             self.chBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 8, 5, 8);
             [self.chBtn setTitle:@"中文" forState:UIControlStateNormal];
             self.chBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -41,6 +43,8 @@
             }];
     
             self.enBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.enBtn.tag = 2;
+            [self.enBtn addTarget:self action:@selector(checkLan:) forControlEvents:UIControlEventTouchUpInside];
             self.enBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 8, 5, 8);
             [self.enBtn setTitle:@"English" forState:UIControlStateNormal];
             self.enBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -56,6 +60,36 @@
             }];
     }
     return self;
+}
+
+- (void)checkLan: (UIButton *)btn {
+    switch (btn.tag) {
+        case 1:
+        {
+            [ChangeLanguage setUserlanguage:@"zh-Hans"];
+            [self.chBtn setTitleColor:yellowBorderColor forState:UIControlStateNormal];
+            self.chBtn.layer.borderColor = yellowBorderColor.CGColor;
+            [self.enBtn setTitleColor:grayBorderColor forState:UIControlStateNormal];
+            self.enBtn.layer.borderColor = grayBorderColor.CGColor;
+        }
+            break;
+        default:
+        {
+            [ChangeLanguage setUserlanguage:@"en"];
+            [self.chBtn setTitleColor:grayBorderColor forState:UIControlStateNormal];
+            self.chBtn.layer.borderColor = grayBorderColor.CGColor;
+            [self.enBtn setTitleColor:yellowBorderColor forState:UIControlStateNormal];
+            self.enBtn.layer.borderColor = yellowBorderColor.CGColor;
+        }
+            break;
+    }
+    //创建通知
+    NSNotification *notification =[NSNotification notificationWithName:LanguageChange object:nil userInfo:nil];
+    //通过通知中心发送通知
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    [self.chBtn setTitle:[[ChangeLanguage bundle] localizedStringForKey:@"simplifiedChinese" value:nil table:@"English"] forState:UIControlStateNormal];
+    [self.enBtn setTitle:[[ChangeLanguage bundle] localizedStringForKey:@"English" value:nil table:@"English"] forState:UIControlStateNormal];
+    
 }
 
 @end
