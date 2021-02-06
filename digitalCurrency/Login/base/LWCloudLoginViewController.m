@@ -9,9 +9,12 @@
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
 @interface LWCloudLoginViewController ()
-@property (nonatomic, strong) UIImageView *countryImgV;
 @property (nonatomic, strong) UILabel *countryLabel;
 @property (nonatomic, strong) UILabel *countryCodeLabel;
+@property (nonatomic, strong) UITextField *phoneTextField;
+@property (nonatomic, strong) UIButton *nextBtn;
+@property (nonatomic, strong) UIButton *switchBtn;
+@property (nonatomic, strong) UILabel *protocolLabel;
 @end
 
 @implementation LWCloudLoginViewController
@@ -68,29 +71,21 @@
         make.top.mas_equalTo(areaTitleLabel.mas_bottom).offset(32);
     }];
     
-    self.countryImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"china"]];
-    [self.view addSubview:self.countryImgV];
-    [self.countryImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(@18);
-        make.left.mas_equalTo(line1).offset(7.5);
-        make.top.mas_equalTo(line1.mas_bottom).offset(18.5);
-    }];
-    
     self.countryLabel = [[UILabel alloc] init];
     self.countryLabel.text = LocalizationKey(@"china");
     self.countryLabel.font = [UIFont systemFontOfSize:17];
     self.countryLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:self.countryLabel];
     [self.countryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.countryImgV.mas_right).offset(18);
-        make.centerY.mas_equalTo(self.countryImgV);
+        make.left.mas_equalTo(line1).offset(7.5);
+        make.top.mas_equalTo(line1.mas_bottom).offset(18.5);
     }];
     
     UIImageView *rightArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrow"]];
     [self.view addSubview:rightArrow];
     [rightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(line1).offset(-1);
-        make.centerY.mas_equalTo(self.countryImgV);
+        make.centerY.mas_equalTo(self.countryLabel);
     }];
     
     UIView *line2 = [[UIView alloc] init];
@@ -100,7 +95,7 @@
         make.height.mas_equalTo(@1);
         make.left.mas_equalTo(self.view).offset(15);
         make.right.mas_equalTo(self.view).offset(-15);
-        make.top.mas_equalTo(self.countryImgV.mas_bottom).offset(17.5);
+        make.top.mas_equalTo(self.countryLabel.mas_bottom).offset(17.5);
     }];
     
     self.countryCodeLabel = [[UILabel alloc] init];
@@ -123,8 +118,64 @@
         make.top.mas_equalTo(line2.mas_bottom);
     }];
     
-   
+    self.phoneTextField = [[UITextField alloc] init];
+    self.phoneTextField.placeholder = @"请输入手机号";
+    [self.view addSubview:self.phoneTextField];
+    [self.phoneTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(verticalLine.mas_right);
+        make.top.mas_equalTo(line2.mas_bottom);
+        make.height.mas_equalTo(54);
+        make.right.mas_equalTo(line2);
+    }];
     
+    UIView *line3 = [[UIView alloc] init];
+    line3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
+    [self.view addSubview:line3];
+    [line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(@1);
+        make.left.mas_equalTo(self.view).offset(15);
+        make.right.mas_equalTo(self.view).offset(-15);
+        make.top.mas_equalTo(self.phoneTextField.mas_bottom);
+    }];
+    
+    self.nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    [self.nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.nextBtn.backgroundColor = [UIColor colorWithHexString:@"#F88D02"];
+    self.nextBtn.layer.cornerRadius = 2;
+    self.nextBtn.layer.masksToBounds = YES;
+    [self.nextBtn addTarget:self action:@selector(nextAction) forControlEvents:UIControlEventTouchUpInside];
+    self.nextBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.view addSubview:self.nextBtn];
+    [self.nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).offset(15);
+        make.right.mas_equalTo(self.view).offset(-15);
+        make.height.mas_equalTo(44);
+        make.top.mas_equalTo(line3.mas_bottom).offset(40.5);
+    }];
+    
+    self.switchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.switchBtn setTitle:@"没有账号？去注册" forState:UIControlStateNormal];
+    self.switchBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [self.switchBtn setTitleColor:[UIColor colorWithHexString:@"#848484"] forState:UIControlStateNormal];
+    [self.switchBtn addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.switchBtn];
+    [self.switchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.nextBtn.mas_bottom).offset(19.5);
+        make.centerX.mas_equalTo(self.view);
+    }];
+    
+    self.protocolLabel = [[UILabel alloc] init];
+    NSMutableAttributedString *protocolStr = [[NSMutableAttributedString alloc] initWithString:@"登录即代表您同意 《用户注册协议》"];
+    [protocolStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, protocolStr.length)];
+    [protocolStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(0, 7)];
+    [protocolStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(7, protocolStr.length-7)];
+    self.protocolLabel.attributedText = protocolStr;
+    [self.view addSubview:self.protocolLabel];
+    [self.protocolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).offset(-44);
+    }];
 }
 
 
@@ -133,5 +184,15 @@
 #pragma mark - 返回上个界面
 - (void)backAction {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 下一步
+- (void)nextAction {
+    
+}
+
+#pragma mark - 切换注册
+- (void)registerAction {
+    
 }
 @end
