@@ -8,12 +8,10 @@
 #import "LWCloudLoginViewController.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
-#import <CRBoxInputView/CRBoxInputView.h>
 @interface LWCloudLoginViewController ()
 @property (nonatomic, strong) UIImageView *countryImgV;
 @property (nonatomic, strong) UILabel *countryLabel;
 @property (nonatomic, strong) UILabel *countryCodeLabel;
-@property (nonatomic, strong) CRBoxInputView *boxInputView;
 @end
 
 @implementation LWCloudLoginViewController
@@ -125,53 +123,7 @@
         make.top.mas_equalTo(line2.mas_bottom);
     }];
     
-    CRBoxInputCellProperty *cellProperty = [CRBoxInputCellProperty new];
-    cellProperty.cellCursorColor = [UIColor colorWithHexString:@"#FFECEC"];
-    cellProperty.cellCursorWidth = 2;
-    cellProperty.cellCursorHeight = 27;
-    cellProperty.cornerRadius = 0;
-    cellProperty.borderWidth = 0;
-    cellProperty.cellFont = [UIFont boldSystemFontOfSize:24];
-    cellProperty.cellTextColor = [UIColor systemPinkColor];
-    cellProperty.showLine = YES;
-    cellProperty.customLineViewBlock = ^CRLineView * _Nonnull{
-        CRLineView *lineView = [CRLineView new];
-        lineView.underlineColorNormal = [UIColor redColor];
-        lineView.underlineColorSelected = [UIColor greenColor];
-        lineView.underlineColorFilled = [UIColor yellowColor];
-        [lineView.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(4);
-            make.left.right.bottom.offset(0);
-        }];
-        
-        lineView.selectChangeBlock = ^(CRLineView * _Nonnull lineView, BOOL selected) {
-            if (selected) {
-                [lineView.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.mas_equalTo(6);
-                }];
-            } else {
-                [lineView.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.mas_equalTo(4);
-                }];
-            }
-        };
-
-        return lineView;
-    };
-
-    self.boxInputView = [[CRBoxInputView alloc] initWithCodeLength:4];
-    self.boxInputView.mainCollectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    self.boxInputView.boxFlowLayout.itemSize = CGSizeMake(52, 52);
-    self.boxInputView.customCellProperty = cellProperty;
-    [self.boxInputView loadAndPrepareViewWithBeginEdit:YES];
-    [self.view addSubview:self.boxInputView];
-    [self.boxInputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line2.mas_bottom);
-        make.left.mas_equalTo(verticalLine.mas_right);
-        make.right.mas_equalTo(line2);
-        make.height.mas_equalTo(@54);
-    }];
-    
+   
     
 }
 

@@ -30,5 +30,4 @@ target "digitalCurrenc" do
   pod 'YYCategories'
   pod 'Bugly', '2.5.5'
   pod 'SwiftyJSON', '~> 4.0'
-  pod 'CRBoxInputView'
 end
