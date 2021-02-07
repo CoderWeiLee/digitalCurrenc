@@ -8,8 +8,9 @@
 #import "LWRecommendListViewController.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
-@interface LWRecommendListViewController ()
-
+#import "LWRealNameTableViewCell.h"
+@interface LWRecommendListViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation LWRecommendListViewController
@@ -77,6 +78,78 @@
         make.top.mas_equalTo(countAmount.mas_bottom).offset(17);
     }];
     
+    UIView *verLine = [[UIView alloc] init];
+    verLine.backgroundColor = [UIColor colorWithHexString:@"#3C3C3C"];
+    [topContainer addSubview:verLine];
+    [verLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(1);
+        make.height.mas_equalTo(30);
+        make.center.mas_equalTo(topContainer);
+    }];
+    
+    UIView *leftView = [[UIView alloc] init];
+    [topContainer addSubview:leftView];
+    [leftView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.mas_equalTo(topContainer);
+        make.right.mas_equalTo(verLine.mas_left);
+    }];
+    
+    UIView *rightView = [[UIView alloc] init];
+    [topContainer addSubview:rightView];
+    [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.top.bottom.mas_equalTo(topContainer);
+        make.left.mas_equalTo(verLine.mas_right);
+    }];
+    
+    UILabel *leftTitle = [[UILabel alloc] init];
+    leftTitle.text = @"挂买金额";
+    leftTitle.textColor = [UIColor colorWithHexString:@"#999B9C"];
+    leftTitle.font = [UIFont systemFontOfSize:11];
+    [leftView addSubview:leftTitle];
+    [leftTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(leftView).offset(18);
+        make.centerX.mas_equalTo(leftView);
+    }];
+    
+    UILabel *leftAmount = [[UILabel alloc] init];
+    leftAmount.textColor = [UIColor colorWithHexString:@"#F88D02"];
+    leftAmount.font = [UIFont systemFontOfSize:15];
+    [leftView addSubview:leftAmount];
+    [leftAmount mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(leftTitle.mas_bottom).offset(11.5);
+        make.centerX.mas_equalTo(leftView);
+    }];
+    
+    
+    
+    UILabel *rightTitle = [[UILabel alloc] init];
+    rightTitle.text = @"成交金额";
+    rightTitle.textColor = [UIColor colorWithHexString:@"#999B9C"];
+    rightTitle.font = [UIFont systemFontOfSize:11];
+    [rightView addSubview:rightTitle];
+    [rightTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(rightView).offset(18);
+        make.centerX.mas_equalTo(rightView);
+    }];
+    
+    UILabel *rightAmount = [[UILabel alloc] init];
+    rightAmount.textColor = [UIColor colorWithHexString:@"#F88D02"];
+    rightAmount.font = [UIFont systemFontOfSize:15];
+    [rightView addSubview:rightAmount];
+    [rightAmount mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(rightTitle.mas_bottom).offset(11.5);
+        make.centerX.mas_equalTo(rightView);
+    }];
+    
+    self.tableView = [[UITableView alloc] init];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView registerClass:[LWRealNameTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LWRealNameTableViewCell class])];
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(topContainer.mas_bottom).offset(10);
+        make.left.right.bottom.mas_equalTo(self.view);
+    }];
     
     
 }
@@ -84,6 +157,17 @@
 #pragma mark - 返回上个界面
 - (void)backAction {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UITableViewDataSource & UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LWRealNameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LWRealNameTableViewCell class]) forIndexPath:indexPath];
+    
+    return cell;
 }
 
 

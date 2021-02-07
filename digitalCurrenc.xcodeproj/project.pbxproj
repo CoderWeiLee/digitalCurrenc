@@ -589,6 +589,7 @@
 		D0F2073E25BC0EA40032B17D /* LWEnergyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2073D25BC0EA40032B17D /* LWEnergyTableViewCell.m */; };
 		D0F2074225BC363B0032B17D /* LWEnergyBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */; };
 		D0FE1B5D25CBF0EC008C37C2 /* LWCloudLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */; };
+		D0FE1C2025CF77DE008C37C2 /* LWRealNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FE1C1F25CF77DE008C37C2 /* LWRealNameTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1582,6 +1583,8 @@
 		D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWEnergyBottomTableViewCell.m; sourceTree = "<group>"; };
 		D0FE1B5B25CBF0EC008C37C2 /* LWCloudLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWCloudLoginViewController.h; sourceTree = "<group>"; };
 		D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWCloudLoginViewController.m; sourceTree = "<group>"; };
+		D0FE1C1E25CF77DE008C37C2 /* LWRealNameTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWRealNameTableViewCell.h; sourceTree = "<group>"; };
+		D0FE1C1F25CF77DE008C37C2 /* LWRealNameTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWRealNameTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1782,6 +1785,8 @@
 				D038357625CEDC60006BC31D /* LWSelectAreaTableViewCell.m */,
 				D038357925CEE02A006BC31D /* LWRecommendListViewController.h */,
 				D038357A25CEE02A006BC31D /* LWRecommendListViewController.m */,
+				D0FE1C1E25CF77DE008C37C2 /* LWRealNameTableViewCell.h */,
+				D0FE1C1F25CF77DE008C37C2 /* LWRealNameTableViewCell.m */,
 				3A79494F258F14B800595623 /* EmptyView */,
 				3A79493A258F13CA00595623 /* tool */,
 				3A794922258F138200595623 /* BaseUIkit */,
@@ -4316,6 +4321,7 @@
 				9241BB7A25469DA700FF2FFB /* Y_KLineVolumeView.m in Sources */,
 				9241BC4E25469DA700FF2FFB /* AccountImageTableViewCell.m in Sources */,
 				3A794905258F12CE00595623 /* YYTextInput.m in Sources */,
+				D0FE1C2025CF77DE008C37C2 /* LWRealNameTableViewCell.m in Sources */,
 				9241BBA025469DA700FF2FFB /* NSDictionary+Log.m in Sources */,
 				9241BBD225469DA700FF2FFB /* SelectBankNameModel.m in Sources */,
 				D038357325CEC778006BC31D /* LWSelectAreaViewController.m in Sources */,
