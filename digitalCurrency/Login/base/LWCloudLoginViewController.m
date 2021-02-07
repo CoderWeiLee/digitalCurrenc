@@ -10,6 +10,7 @@
 #import "UIColor+Hex.h"
 #import "LWCodeViewController.h"
 #import "LWSelectAreaViewController.h"
+#import "MBProgressHUD.h"
 @interface LWCloudLoginViewController ()
 @property (nonatomic, strong) UILabel *countryLabel;
 @property (nonatomic, strong) UILabel *countryCodeLabel;
@@ -126,13 +127,21 @@
     [self.view addSubview:verticalLine];
     [verticalLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(@55);
-        make.left.mas_equalTo(self.countryCodeLabel.mas_right).offset(26);
+        make.left.mas_equalTo(self.view).offset(79.5);
         make.width.mas_equalTo(@1);
         make.top.mas_equalTo(line2.mas_bottom);
     }];
     
     self.phoneTextField = [[UITextField alloc] init];
-    self.phoneTextField.placeholder = @"请输入手机号";
+    UIView *leftView = [[UIView alloc]init];
+    
+    self.phoneTextField.leftViewMode = UITextFieldViewModeAlways;
+    NSMutableAttributedString *placeHolder = [[NSMutableAttributedString alloc] initWithString:@"请输入手机号"];
+    [placeHolder addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:1 alpha:0.6] range:NSMakeRange(0, placeHolder.length)];
+    [placeHolder addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, placeHolder.length)];
+    self.phoneTextField.attributedPlaceholder = placeHolder;
+    self.phoneTextField.textColor = [UIColor whiteColor];
+    self.phoneTextField.keyboardType = UIKeyboardTypePhonePad;
     [self.view addSubview:self.phoneTextField];
     [self.phoneTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(verticalLine.mas_right);
@@ -140,6 +149,12 @@
         make.height.mas_equalTo(54);
         make.right.mas_equalTo(line2);
     }];
+    [self.phoneTextField addSubview:leftView];
+    [leftView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.equalTo(self.phoneTextField);
+        make.width.mas_equalTo(14);
+    }];
+    self.phoneTextField.leftView = leftView;
     
     UIView *line3 = [[UIView alloc] init];
     line3.backgroundColor = [UIColor colorWithHexString:@"#1E1E1E"];
@@ -208,7 +223,18 @@
 
 #pragma mark - 下一步
 - (void)nextAction {
+    //检查手机号的格式是否正确
+    if (![self valiMobile:self.phoneTextField.text]) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.label.text = @"请输入正确的手机号码";
+        hud.mode = MBProgressHUDModeText;
+        [hud showAnimated:YES];
+        [hud hideAnimated:YES afterDelay:1.0];
+        return;
+    }
+    //检测账号有没有注册过
     LWCodeViewController *codeVc = [[LWCodeViewController alloc] init];
+    codeVc.phoneNumber = self.phoneTextField.text;
     codeVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:codeVc animated:YES];
 }
@@ -228,5 +254,52 @@
     LWSelectAreaViewController *selectVc = [[LWSelectAreaViewController alloc] init];
     selectVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:selectVc animated:YES];
+}
+
+#pragma mark - 检查手机号码格式
+- (BOOL)valiMobile:(NSString *)mobile {
+    if (mobile.length != 11) {
+        return NO;
+    }
+    /**
+         * 手机号码:
+         * 13[0-9], 14[5,7], 15[0, 1, 2, 3, 5, 6, 7, 8, 9], 17[0, 1, 6, 7, 8], 18[0-9]
+         * 移动号段: 134,135,136,137,138,139,147,150,151,152,157,158,159,170,178,182,183,184,187,188
+         * 联通号段: 130,131,132,145,155,156,170,171,175,176,185,186
+         * 电信号段: 133,149,153,170,173,177,180,181,189
+         */
+        NSString *MOBILE = @"^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\\d{8}$";
+        
+        /**
+         * 中国移动：China Mobile
+         * 134,135,136,137,138,139,147,150,151,152,157,158,159,170,178,182,183,184,187,188
+         */
+        NSString *CM = @"^1(3[4-9]|4[7]|5[0-27-9]|7[08]|8[2-478])\\d{8}$";
+        
+        /**
+         * 中国联通：China Unicom
+         * 130,131,132,145,155,156,170,171,175,176,185,186
+         */
+        NSString *CU = @"^1(3[0-2]|4[5]|5[56]|7[0156]|8[56])\\d{8}$";
+        
+        /**
+         * 中国电信：China Telecom
+         * 133,149,153,170,173,177,180,181,189
+         */
+        NSString *CT = @"^1(3[3]|4[9]|53|7[037]|8[019])\\d{8}$";
+        
+        NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+        NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+        NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+        NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+        
+        if (([regextestmobile evaluateWithObject:mobile] == YES) ||
+            ([regextestcm evaluateWithObject:mobile] == YES) ||
+            ([regextestct evaluateWithObject:mobile] == YES) ||
+            ([regextestcu evaluateWithObject:mobile] == YES)) {
+            return YES;
+        }else {
+            return NO;
+        }
 }
 @end

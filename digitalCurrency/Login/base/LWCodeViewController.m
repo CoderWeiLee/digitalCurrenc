@@ -52,9 +52,9 @@
     
     UILabel *sendLabel = [[UILabel alloc] init];
     NSString *send = LocalizationKey(@"codeSended");
-    NSString *phone1 = [self.phoneNumber substringToIndex:2];
-    NSString *phone2 = [self.phoneNumber substringWithRange:NSMakeRange(2, 6)];
-    NSString *phone3 = [self.phoneNumber substringFromIndex:6];
+    NSString *phone1 = [self.phoneNumber substringToIndex:3];
+    NSString *phone2 = [self.phoneNumber substringWithRange:NSMakeRange(3, 4)];
+    NSString *phone3 = [self.phoneNumber substringFromIndex:7];
     NSMutableAttributedString *codeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@ %@ %@",send, phone1, phone2, phone3]];
     [codeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, codeStr.length)];
     [codeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(0, 5)];
