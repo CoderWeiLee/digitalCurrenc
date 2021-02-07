@@ -17,6 +17,8 @@ UITextRange *previousSelection;
 }
 @property (nonatomic, strong) UIButton *countryBtn;
 @property (nonatomic, strong) UITextField *phoneText;
+@property (nonatomic, strong) UITextField *nameText;
+@property (nonatomic, strong) UITextField *codeText;
 @end
 
 @implementation LWCloudRegisterViewController
@@ -150,6 +152,32 @@ UITextRange *previousSelection;
     [containerView2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(line2);
         make.bottom.mas_equalTo(line3);
+    }];
+    
+    //添加用户名
+    UILabel *userNameLabel = [[UILabel alloc] init];
+    userNameLabel.text = @"用户名";
+    userNameLabel.textColor = [UIColor whiteColor];
+    userNameLabel.font = [UIFont systemFontOfSize:15];
+    [containerView2 addSubview:userNameLabel];
+    [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(line1).offset(5);
+        make.centerY.mas_equalTo(containerView2);
+        make.width.mas_equalTo(100);
+    }];
+    
+    //添加输入框
+    self.nameText = [[UITextField alloc] init];
+    NSMutableAttributedString *namePlaceholder = [[NSMutableAttributedString alloc] initWithString:@"请输入用户名"];
+    [namePlaceholder addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, namePlaceholder.length)];
+    [namePlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(0, namePlaceholder.length)];
+    self.nameText.attributedPlaceholder = namePlaceholder;
+    self.nameText.textColor = [UIColor whiteColor];
+    self.nameText.font = [UIFont systemFontOfSize:15];
+    [containerView2 addSubview:self.nameText];
+    [self.nameText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(userNameLabel.mas_right).offset(100);
+        make.top.bottom.right.mas_equalTo(containerView2);
     }];
     
     //添加容器视图3
