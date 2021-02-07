@@ -590,6 +590,8 @@
 		D0F2074225BC363B0032B17D /* LWEnergyBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2074125BC363B0032B17D /* LWEnergyBottomTableViewCell.m */; };
 		D0FE1B5D25CBF0EC008C37C2 /* LWCloudLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */; };
 		D0FE1C2025CF77DE008C37C2 /* LWRealNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FE1C1F25CF77DE008C37C2 /* LWRealNameTableViewCell.m */; };
+		D0FE1C2425CF918B008C37C2 /* LWCloudRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FE1C2325CF918B008C37C2 /* LWCloudRegisterViewController.m */; };
+		D0FE1C2825CFCAE6008C37C2 /* LWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FE1C2725CFCAE6008C37C2 /* LWButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1585,6 +1587,10 @@
 		D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWCloudLoginViewController.m; sourceTree = "<group>"; };
 		D0FE1C1E25CF77DE008C37C2 /* LWRealNameTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWRealNameTableViewCell.h; sourceTree = "<group>"; };
 		D0FE1C1F25CF77DE008C37C2 /* LWRealNameTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWRealNameTableViewCell.m; sourceTree = "<group>"; };
+		D0FE1C2225CF918B008C37C2 /* LWCloudRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWCloudRegisterViewController.h; sourceTree = "<group>"; };
+		D0FE1C2325CF918B008C37C2 /* LWCloudRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWCloudRegisterViewController.m; sourceTree = "<group>"; };
+		D0FE1C2625CFCAE6008C37C2 /* LWButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWButton.h; sourceTree = "<group>"; };
+		D0FE1C2725CFCAE6008C37C2 /* LWButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1777,6 +1783,8 @@
 				3A794954258F156900595623 /* SettingUpdateHeaderView.m */,
 				D0FE1B5B25CBF0EC008C37C2 /* LWCloudLoginViewController.h */,
 				D0FE1B5C25CBF0EC008C37C2 /* LWCloudLoginViewController.m */,
+				D0FE1C2225CF918B008C37C2 /* LWCloudRegisterViewController.h */,
+				D0FE1C2325CF918B008C37C2 /* LWCloudRegisterViewController.m */,
 				D038354425CEAB00006BC31D /* LWCodeViewController.h */,
 				D038354525CEAB00006BC31D /* LWCodeViewController.m */,
 				D038357125CEC778006BC31D /* LWSelectAreaViewController.h */,
@@ -1787,6 +1795,8 @@
 				D038357A25CEE02A006BC31D /* LWRecommendListViewController.m */,
 				D0FE1C1E25CF77DE008C37C2 /* LWRealNameTableViewCell.h */,
 				D0FE1C1F25CF77DE008C37C2 /* LWRealNameTableViewCell.m */,
+				D0FE1C2625CFCAE6008C37C2 /* LWButton.h */,
+				D0FE1C2725CFCAE6008C37C2 /* LWButton.m */,
 				3A79494F258F14B800595623 /* EmptyView */,
 				3A79493A258F13CA00595623 /* tool */,
 				3A794922258F138200595623 /* BaseUIkit */,
@@ -4072,6 +4082,7 @@
 				9241BC2325469DA700FF2FFB /* MyBillDetail1ViewController.m in Sources */,
 				9241BCAA25469DA800FF2FFB /* CustomSectionHeader.m in Sources */,
 				9241BCB525469DA800FF2FFB /* BeingauditedBusViewController.m in Sources */,
+				D0FE1C2825CFCAE6008C37C2 /* LWButton.m in Sources */,
 				9241BC2425469DA700FF2FFB /* MyBillChatViewController.m in Sources */,
 				3A794952258F14B900595623 /* EmptyDataView.m in Sources */,
 				9241BB9A25469DA700FF2FFB /* ZLGestureLockIndicator.m in Sources */,
@@ -4280,6 +4291,7 @@
 				9241BBC925469DA700FF2FFB /* KSGuaidViewCell.m in Sources */,
 				9241BCBF25469DA800FF2FFB /* BuyCoinsViewController.m in Sources */,
 				9241BD1925469DA800FF2FFB /* MineNetManager.m in Sources */,
+				D0FE1C2425CF918B008C37C2 /* LWCloudRegisterViewController.m in Sources */,
 				3A794912258F12CE00595623 /* NSParagraphStyle+YYText.m in Sources */,
 				9241BCAF25469DA800FF2FFB /* BuyOrSellCoinInfo.m in Sources */,
 				9241BBEC25469DA700FF2FFB /* ForgetMoneyPassViewController.m in Sources */,

@@ -11,6 +11,7 @@
 #import "LWCodeViewController.h"
 #import "LWSelectAreaViewController.h"
 #import "MBProgressHUD.h"
+#import "LWCloudRegisterViewController.h"
 @interface LWCloudLoginViewController ()
 @property (nonatomic, strong) UILabel *countryLabel;
 @property (nonatomic, strong) UILabel *countryCodeLabel;
@@ -241,7 +242,9 @@
 
 #pragma mark - 切换注册
 - (void)registerAction {
-    
+    LWCloudRegisterViewController *registerVc = [[LWCloudRegisterViewController alloc] init];
+    registerVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:registerVc animated:YES];
 }
 
 #pragma mark - 用户协议的点击
