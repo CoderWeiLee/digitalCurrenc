@@ -10,15 +10,16 @@
 #import "UIColor+Hex.h"
 #import "LWButton.h"
 #import <CRBoxInputView/CRBoxInputView.h>
-@interface LWCloudRegisterViewController ()
+@interface LWCloudRegisterViewController ()<UITextFieldDelegate>
+{
+NSString *previousTextFieldContent;
+UITextRange *previousSelection;
+}
 @property (nonatomic, strong) UIButton *countryBtn;
-@property (nonatomic, strong) CRBoxInputView *boxInputView1;
-@property (nonatomic, strong) CRBoxInputView *boxInputView2;
-@property (nonatomic, strong) CRBoxInputView *boxInputView3;
+@property (nonatomic, strong) UITextField *phoneText;
 @end
 
 @implementation LWCloudRegisterViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
@@ -126,47 +127,22 @@
         make.width.mas_equalTo(1);
     }];
     
-    // 添加box1
-    CRBoxInputCellProperty *cellProperty1 = [CRBoxInputCellProperty new];
-    cellProperty1.showLine = YES; //必需
-    //背景颜色
-    cellProperty1.cellBgColorNormal = [UIColor clearColor];
-    cellProperty1.cellBgColorSelected = [UIColor clearColor];
-    //边框颜色
-    cellProperty1.cellBorderColorNormal = [UIColor clearColor];
-    cellProperty1.cellBorderColorSelected = [UIColor clearColor];
-//    //光标颜色
-//    cellProperty1.cellCursorColor = [UIColor colorWithHexString:@"#F88D02"];
-//    //光标宽度
-    cellProperty1.cellCursorWidth = 0;
-    //光标高度
-    cellProperty1.cellCursorHeight = 0;
-    //字体颜色
-    cellProperty1.cellTextColor = [UIColor whiteColor];
-    //字体大小
-    cellProperty1.cellFont = [UIFont systemFontOfSize:40];
-    cellProperty1.customLineViewBlock = ^CRLineView * _Nonnull{
-        CRLineView *lineView = [CRLineView new];
-        lineView.underlineColorNormal = [UIColor whiteColor];
-        lineView.underlineColorSelected = [UIColor whiteColor];
-        lineView.underlineColorFilled = [UIColor whiteColor];
-        [lineView.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(2);
-            make.centerY.offset(0);
-            make.width.mas_equalTo(5);
-        }];
-        return lineView;
-    }; //可选
-    self.boxInputView1 = [[CRBoxInputView alloc] initWithCodeLength:3];
-    self.boxInputView1.customCellProperty = cellProperty1;
-    [self.boxInputView1 loadAndPrepareViewWithBeginEdit:YES];
-    [containerView1 addSubview:self.boxInputView1];
-    [self.boxInputView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(verLine.mas_right).offset(10);
-        make.width.mas_equalTo(54);
-        make.top.mas_equalTo(line1.mas_bottom);
-        make.height.mas_equalTo(54);
+    self.phoneText = [[UITextField alloc] init];
+    NSMutableAttributedString *placeHolder = [[NSMutableAttributedString alloc] initWithString:@"--- ---- ----"];
+    [placeHolder addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, placeHolder.length)];
+    [placeHolder addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, placeHolder.length)];
+    self.phoneText.attributedPlaceholder = placeHolder;
+    self.phoneText.keyboardType = UIKeyboardTypePhonePad;
+    self.phoneText.textColor = [UIColor whiteColor];
+    self.phoneText.delegate = self;
+    self.phoneText.font = [UIFont boldSystemFontOfSize:15];
+    [self.phoneText addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    [containerView1 addSubview:self.phoneText];
+    [self.phoneText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.countryBtn.mas_right).offset(20);
+        make.top.bottom.mas_equalTo(containerView1);
     }];
+  
     
     //添加容器视图2  2583542755
     UIView *containerView2 = [[UIView alloc] init];
@@ -191,5 +167,78 @@
 #pragma mark - 返回上个界面
 - (void)backAction {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - textFieldDidChange
+- (void)textFieldEditingChanged:(UITextField *)textField
+{
+//限制手机账号长度（有两个空格）
+if (textField.text.length > 13) {
+textField.text = [textField.text substringToIndex:13];
+}
+NSUInteger targetCursorPosition = [textField offsetFromPosition:textField.beginningOfDocument toPosition:textField.selectedTextRange.start];
+NSString *currentStr = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+NSString *preStr = [previousTextFieldContent stringByReplacingOccurrencesOfString:@" " withString:@""];
+//正在执行删除操作时为0，否则为1
+char editFlag = 0;
+if (currentStr.length <= preStr.length) {
+editFlag = 0;
+}
+else {
+editFlag = 1;
+}
+NSMutableString *tempStr = [NSMutableString new];
+int spaceCount = 0;
+if (currentStr.length < 3 && currentStr.length > -1) {
+spaceCount = 0;
+}else if (currentStr.length < 7 && currentStr.length > 2) {
+spaceCount = 1;
+}else if (currentStr.length < 12 && currentStr.length > 6) {
+spaceCount = 2;
+}
+for (int i = 0; i < spaceCount; i++) {
+if (i == 0) {
+[tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(0, 3)], @" "];
+}else if (i == 1) {
+[tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(3, 4)], @" "];
+}else if (i == 2) {
+[tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(7, 4)], @" "];
+}
+}
+if (currentStr.length == 11) {
+[tempStr appendFormat:@"%@%@", [currentStr substringWithRange:NSMakeRange(7, 4)], @" "];
+}
+if (currentStr.length < 4) {
+[tempStr appendString:[currentStr substringWithRange:NSMakeRange(currentStr.length - currentStr.length % 3, currentStr.length % 3)]];
+}else if(currentStr.length > 3 && currentStr.length <12) {
+NSString *str = [currentStr substringFromIndex:3];
+[tempStr appendString:[str substringWithRange:NSMakeRange(str.length - str.length % 4, str.length % 4)]];
+if (currentStr.length == 11) {
+[tempStr deleteCharactersInRange:NSMakeRange(13, 1)];
+}
+}
+textField.text = tempStr;
+// 当前光标的偏移位置
+NSUInteger curTargetCursorPosition = targetCursorPosition;
+if (editFlag == 0) {
+//删除
+if (targetCursorPosition == 9 || targetCursorPosition == 4) {
+curTargetCursorPosition = targetCursorPosition - 1;
+}
+}else {
+//添加
+if (currentStr.length == 8 || currentStr.length == 4) {
+curTargetCursorPosition = targetCursorPosition + 1;
+}
+}
+UITextPosition *targetPosition = [textField positionFromPosition:[textField beginningOfDocument] offset:curTargetCursorPosition];
+[textField setSelectedTextRange:[textField textRangeFromPosition:targetPosition toPosition :targetPosition]];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+previousTextFieldContent = textField.text;
+previousSelection = textField.selectedTextRange;
+return YES;
 }
 @end
