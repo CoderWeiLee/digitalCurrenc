@@ -7,11 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+@interface Location : NSObject<NSCoding>
+@property (nonatomic, copy) NSString *district;
+@property (nonatomic, copy) NSString *country;
+@property (nonatomic, copy) NSString *province;
+@property (nonatomic, copy) NSString *city;
+@end
 
+@interface Country: NSObject<NSCoding>
+@property (nonatomic, copy) NSString *areaCode;
+@property (nonatomic, copy) NSString *language;
+@property (nonatomic, copy) NSString *zhName;
+@property (nonatomic, copy) NSString *sort;
+@property (nonatomic, copy) NSString *localCurrency;
+@property (nonatomic, copy) NSString *enName;
+@end
 @interface YLUserInfo : NSObject<NSCoding>
 
 
 @property(nonatomic,strong)NSString *levelName;
+@property (nonatomic, strong) Location *location;
+@property (nonatomic, copy) NSString *loginCount;
+@property (nonatomic, copy) NSString *secondLevel;
 @property(nonatomic,strong)NSString *city;
 @property(nonatomic,strong)NSString *country;
 @property(nonatomic,strong)NSString *district;

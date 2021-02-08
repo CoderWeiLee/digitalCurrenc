@@ -206,7 +206,7 @@
     //注册
     NSDictionary *params = @{@"phone": phone, @"username": userName, @"country": country, @"code": code, @"promotion": promotion};
     [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/register/phone" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
-        if ([resultObject[@"code"] isEqualToString:@"200"]) {
+        if ([resultObject[@"message"] isEqualToString:@"SUCCESS"]) {
             
         }else {
             
