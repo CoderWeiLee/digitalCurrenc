@@ -235,6 +235,7 @@
     }
     //检测账号有没有注册过
     LWCodeViewController *codeVc = [[LWCodeViewController alloc] init];
+    codeVc.fromType = FromTypeLogin;
     codeVc.phoneNumber = self.phoneTextField.text;
     codeVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:codeVc animated:YES];

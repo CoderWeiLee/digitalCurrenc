@@ -9,10 +9,13 @@
 #import <Masonry/Masonry.h>
 #import "UIColor+Hex.h"
 #import <CRBoxInputView/CRBoxInputView.h>
+#import "BaseNetManager.h"
+#import "MBProgressHUD.h"
 @interface LWCodeViewController ()
 @property (nonatomic, strong) CRBoxInputView *boxInputView;
 //倒计时
 @property (nonatomic, strong) UILabel *countDownLabel;
+@property (nonatomic, strong) UIButton *countDownBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
 @end
 
@@ -96,7 +99,20 @@
         }];
         return lineView;
     }; //可选
-    self.boxInputView = [[CRBoxInputView alloc] initWithCodeLength:4];
+    self.boxInputView = [[CRBoxInputView alloc] initWithCodeLength:6];
+    /*
+     typeof(self) __weak wSelf = self;
+     if (self.block) {
+         typeof(self) __strong sSelf = wSelf;
+     */
+    typeof(self) __weak weakSelf = self;
+    self.boxInputView.textDidChangeblock = ^(NSString * _Nullable text, BOOL isFinished) {
+        if (isFinished) {
+            //自动点击登录按钮
+            typeof(self) __strong strongSelf = weakSelf;
+            [strongSelf loginActionWithPhone:strongSelf.phoneNumber code:text];
+        }
+    };
     self.boxInputView.customCellProperty = cellProperty;
     [self.boxInputView loadAndPrepareViewWithBeginEdit:YES];
     [self.view addSubview:self.boxInputView];
@@ -108,15 +124,22 @@
     }];
     
     self.countDownLabel = [[UILabel alloc] init];
-    NSMutableAttributedString *countDownStr = [[NSMutableAttributedString alloc] initWithString:@"60秒后重新获取"];
+    NSMutableAttributedString *countDownStr = [[NSMutableAttributedString alloc] initWithString:@"获取验证码"];
     [countDownStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, countDownStr.length)];
-    [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(0, 3)];
-    [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(3, countDownStr.length - 3)];
+    [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(0, countDownStr.length)];
+//    [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(3, countDownStr.length - 3)];
     self.countDownLabel.attributedText = countDownStr;
     [self.view addSubview:self.countDownLabel];
     [self.countDownLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(self.boxInputView.mas_bottom).offset(45);
+    }];
+    
+    self.countDownBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.countDownBtn addTarget:self action:@selector(sendCode) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.countDownBtn];
+    [self.countDownBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.countDownLabel);
     }];
     
     self.loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -126,7 +149,7 @@
     self.loginBtn.backgroundColor = [UIColor colorWithHexString:@"#F88D02"];
     self.loginBtn.layer.cornerRadius = 2;
     self.loginBtn.layer.masksToBounds = YES;
-    [self.loginBtn addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginBtn addTarget:self action:@selector(loginActionWithPhone:code:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(15);
@@ -135,6 +158,8 @@
         make.top.mas_equalTo(self.countDownLabel.mas_bottom).offset(44);
     }];
     
+    //第一次进入直接调用发送验证码的方法
+    [self sendCode];
 }
 
 #pragma mark - 返回上个界面
@@ -143,8 +168,111 @@
 }
 
 #pragma mark - 登录
-- (void)loginAction {
-    
+- (void)loginActionWithPhone:(NSString *)phone code:(NSString *)code {
+    //验证码登录
+    NSDictionary *params = @{@"phone": phone, @"code": code};
+    [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/login/phone" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+        if (isSuccessed) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.label.text = @"登录成功";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES];
+            [hud hideAnimated:YES afterDelay:1.0];
+        }else {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.label.text = resultObject[@"message"];
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES];
+            [hud hideAnimated:YES afterDelay:1.0];
+        }
+    }];
+}
+
+#pragma mark - 发送验证码
+- (void)sendCode {
+    //按钮倒计时
+    [self messageTime];
+    //准备发送验证码
+    if (self.fromType == FromTypeLogin) {
+        /*
+         uc/mobile/login 登录接口
+         1、验证码接口
+
+          URL:/uc/mobile/code
+         参数：phone
+         country 注意是中文，比如 “美国"
+
+         2、手机号注册
+         URL:/uc/register/phone
+         参数：phone
+         username
+         country
+         code
+         promotion
+
+         3、手机验证码登陆
+         URL:/uc/login/phone
+
+         参数：phone
+         code
+         */
+        NSDictionary *params = @{@"phone": @"13770801786", @"country": @"中国"};
+        typeof(self) __weak weakSelf = self;
+        [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/mobile/code" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+            typeof(weakSelf) __strong strongSelf = weakSelf;
+            if (isSuccessed) {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.label.text = @"短信已发送";
+                hud.mode = MBProgressHUDModeText;
+                [hud showAnimated:YES];
+                [hud hideAnimated:YES afterDelay:1.0];
+                strongSelf.countDownBtn.userInteractionEnabled = NO;
+            }else {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.label.text = resultObject[@"message"];
+                hud.mode = MBProgressHUDModeText;
+                [hud showAnimated:YES];
+                [hud hideAnimated:YES afterDelay:1.0];
+                strongSelf.countDownBtn.userInteractionEnabled = YES;
+            }
+        }];
+    }else {
+        NSDictionary *params = @{@"phone": @"13770801786", @"country": @"中国"};
+    }
+}
+
+#pragma mark - 按钮的倒计时
+- (void)messageTime {   __block int timeout=60; //倒计时时间
+   dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+   dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+   dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+   
+   dispatch_source_set_event_handler(_timer, ^{
+       if(timeout<=0){ //倒计时结束，关闭
+           dispatch_source_cancel(_timer);
+           dispatch_async(dispatch_get_main_queue(), ^{
+               NSMutableAttributedString *countDownStr = [[NSMutableAttributedString alloc] initWithString:@"重新发送验证码"];
+               [countDownStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, countDownStr.length)];
+               [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(0, countDownStr.length)];
+               self.countDownLabel.attributedText = countDownStr;
+               self.countDownBtn.userInteractionEnabled = YES;
+           });
+       }else{
+           int seconds = timeout % 61;
+           NSString *strTime = [NSString stringWithFormat:@"%02d", seconds];
+           dispatch_async(dispatch_get_main_queue(), ^{
+               NSMutableAttributedString *countDownStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@秒后重新获取",strTime]];
+               [countDownStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, countDownStr.length)];
+               [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(0, 3)];
+               [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(3, countDownStr.length - 3)];
+               self.countDownLabel.attributedText = countDownStr;
+               self.countDownBtn.userInteractionEnabled = NO;
+           });
+           timeout--;
+       }
+   });
+   dispatch_resume(_timer);
+   
 }
 
 

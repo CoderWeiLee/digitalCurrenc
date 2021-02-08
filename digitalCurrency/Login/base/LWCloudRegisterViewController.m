@@ -293,6 +293,7 @@ UITextRange *previousSelection;
     //检测账号有没有注册过
     LWCodeViewController *codeVc = [[LWCodeViewController alloc] init];
     codeVc.phoneNumber = self.phoneText.text;
+    codeVc.fromType = FromTypeRegister;
     codeVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:codeVc animated:YES];
 }
