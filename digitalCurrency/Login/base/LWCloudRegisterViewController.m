@@ -282,7 +282,7 @@ UITextRange *previousSelection;
 #pragma mark - 下一步
 - (void)nextAction {
     //检查手机号的格式是否正确
-    if (![self valiMobile:self.phoneText.text]) {
+    if (![self valiMobile:[self.phoneText.text stringByReplacingOccurrencesOfString:@" " withString:@""]]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.label.text = @"请输入正确的手机号码";
         hud.mode = MBProgressHUDModeText;
@@ -294,6 +294,9 @@ UITextRange *previousSelection;
     LWCodeViewController *codeVc = [[LWCodeViewController alloc] init];
     codeVc.phoneNumber = self.phoneText.text;
     codeVc.fromType = FromTypeRegister;
+    codeVc.countryName = self.countryBtn.titleLabel.text;
+    codeVc.userName = self.nameText.text;
+    codeVc.promotion = self.codeText.text;
     codeVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:codeVc animated:YES];
 }

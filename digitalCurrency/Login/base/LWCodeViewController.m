@@ -60,8 +60,8 @@
     NSString *phone3 = [self.phoneNumber substringFromIndex:7];
     NSMutableAttributedString *codeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@ %@ %@",send, phone1, phone2, phone3]];
     [codeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, codeStr.length)];
-    [codeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(0, 5)];
-    [codeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(5, codeStr.length - 5)];
+    [codeStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(0, 7)];
+    [codeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(7, codeStr.length - 7)];
     sendLabel.attributedText = codeStr;
     [self.view addSubview:sendLabel];
     [sendLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,7 +110,14 @@
         if (isFinished) {
             //自动点击登录按钮
             typeof(self) __strong strongSelf = weakSelf;
-            [strongSelf loginActionWithPhone:strongSelf.phoneNumber code:text];
+            //判断当前的type类型
+            if (strongSelf.fromType == FromTypeLogin) {
+                [strongSelf loginActionWithPhone:strongSelf.phoneNumber code:text];
+            }else {
+                //推荐码0QAP
+                NSString *phoneNumber = [strongSelf.phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+                [strongSelf registerActionWithPhone:phoneNumber userName:strongSelf.userName country:strongSelf.countryName code:text promotion:strongSelf.promotion];
+            }
         }
     };
     self.boxInputView.customCellProperty = cellProperty;
@@ -127,7 +134,6 @@
     NSMutableAttributedString *countDownStr = [[NSMutableAttributedString alloc] initWithString:@"获取验证码"];
     [countDownStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, countDownStr.length)];
     [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#F88D02"] range:NSMakeRange(0, countDownStr.length)];
-//    [countDownStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#848484"] range:NSMakeRange(3, countDownStr.length - 3)];
     self.countDownLabel.attributedText = countDownStr;
     [self.view addSubview:self.countDownLabel];
     [self.countDownLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -172,7 +178,7 @@
     //验证码登录
     NSDictionary *params = @{@"phone": phone, @"code": code};
     [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/login/phone" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
-        if (isSuccessed) {
+        if ([resultObject[@"code"] isEqualToString:@"200"]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.label.text = @"登录成功";
             hud.mode = MBProgressHUDModeText;
@@ -188,10 +194,28 @@
     }];
 }
 
+#pragma mark - 注册
+
+/// 注册的接口
+/// @param phone 手机号码
+/// @param userName 用户名
+/// @param country 国家，需要传递中文
+/// @param code 验证码
+/// @param promotion 推荐码
+- (void)registerActionWithPhone:(NSString *)phone userName:(NSString *)userName country:(NSString *)country code:(NSString *)code promotion:(NSString *)promotion {
+    //注册
+    NSDictionary *params = @{@"phone": phone, @"username": userName, @"country": country, @"code": code, @"promotion": promotion};
+    [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/register/phone" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+        if ([resultObject[@"code"] isEqualToString:@"200"]) {
+            
+        }else {
+            
+        }
+    }];
+}
+
 #pragma mark - 发送验证码
 - (void)sendCode {
-    //按钮倒计时
-    [self messageTime];
     //准备发送验证码
     if (self.fromType == FromTypeLogin) {
         /*
@@ -202,19 +226,44 @@
          参数：phone
          country 注意是中文，比如 “美国"
 
-         2、手机号注册
-         URL:/uc/register/phone
-         参数：phone
-         username
-         country
-         code
-         promotion
+    
 
          3、手机验证码登陆
          URL:/uc/login/phone
 
          参数：phone
          code
+         */
+        NSDictionary *params = @{@"phone": @"13770801786", @"country": @"中国"};
+        typeof(self) __weak weakSelf = self;
+        [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/mobile/login" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
+            typeof(weakSelf) __strong strongSelf = weakSelf;
+            if (isSuccessed) {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.label.text = @"短信已发送";
+                hud.mode = MBProgressHUDModeText;
+                [hud showAnimated:YES];
+                [hud hideAnimated:YES afterDelay:1.0];
+                strongSelf.countDownBtn.userInteractionEnabled = NO;
+                //按钮倒计时
+                [strongSelf messageTime];
+            }else {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.label.text = resultObject[@"message"];
+                hud.mode = MBProgressHUDModeText;
+                [hud showAnimated:YES];
+                [hud hideAnimated:YES afterDelay:1.0];
+                strongSelf.countDownBtn.userInteractionEnabled = YES;
+            }
+        }];
+    }else {
+        /*
+         URL:/uc/register/phone
+         参数：phone
+         username
+         country
+         code
+         promotion
          */
         NSDictionary *params = @{@"phone": @"13770801786", @"country": @"中国"};
         typeof(self) __weak weakSelf = self;
@@ -227,6 +276,8 @@
                 [hud showAnimated:YES];
                 [hud hideAnimated:YES afterDelay:1.0];
                 strongSelf.countDownBtn.userInteractionEnabled = NO;
+                //按钮倒计时
+                [strongSelf messageTime];
             }else {
                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 hud.label.text = resultObject[@"message"];
@@ -236,8 +287,6 @@
                 strongSelf.countDownBtn.userInteractionEnabled = YES;
             }
         }];
-    }else {
-        NSDictionary *params = @{@"phone": @"13770801786", @"country": @"中国"};
     }
 }
 
@@ -274,6 +323,4 @@
    dispatch_resume(_timer);
    
 }
-
-
 @end

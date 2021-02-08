@@ -13,7 +13,14 @@ typedef NS_ENUM(NSUInteger, FromType) {
     FromTypeRegister,  //从注册页面跳转过来的
 };
 @interface LWCodeViewController : BaseViewController
+//国家名称，需要传递中文
+@property (nonatomic, copy) NSString *countryName;
+//电话号码
 @property (nonatomic, copy) NSString *phoneNumber;
+//用户名
+@property (nonatomic, copy) NSString *userName;
+//用户填写的推荐码
+@property (nonatomic, copy) NSString *promotion;
 @property (nonatomic, assign) FromType fromType;
 @end
 
