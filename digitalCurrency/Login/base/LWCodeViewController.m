@@ -11,6 +11,7 @@
 #import <CRBoxInputView/CRBoxInputView.h>
 #import "BaseNetManager.h"
 #import "MBProgressHUD.h"
+#import "YLTabBarController.h"
 @interface LWCodeViewController ()
 @property (nonatomic, strong) CRBoxInputView *boxInputView;
 //倒计时
@@ -178,12 +179,13 @@
     //验证码登录
     NSDictionary *params = @{@"phone": phone, @"code": code};
     [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/login/phone" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
-        if ([resultObject[@"code"] isEqualToString:@"200"]) {
+        if (resultObject[@"code"] == 0) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.label.text = @"登录成功";
             hud.mode = MBProgressHUDModeText;
             [hud showAnimated:YES];
             [hud hideAnimated:YES afterDelay:1.0];
+            [self loginSuc:resultObject];
         }else {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.label.text = resultObject[@"message"];
@@ -207,9 +209,13 @@
     NSDictionary *params = @{@"phone": phone, @"username": userName, @"country": country, @"code": code, @"promotion": promotion};
     [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/register/phone" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
         if ([resultObject[@"message"] isEqualToString:@"SUCCESS"]) {
-            
+            [self loginSuc:resultObject];
         }else {
-            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.label.text = resultObject[@"message"];
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES];
+            [hud hideAnimated:YES afterDelay:1.0];
         }
     }];
 }
@@ -234,7 +240,8 @@
          参数：phone
          code
          */
-        NSDictionary *params = @{@"phone": @"13770801786", @"country": @"中国"};
+        NSString *pn = [self.phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSDictionary *params = @{@"phone": pn, @"country": @"中国"};
         typeof(self) __weak weakSelf = self;
         [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/mobile/login" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
             typeof(weakSelf) __strong strongSelf = weakSelf;
@@ -265,7 +272,8 @@
          code
          promotion
          */
-        NSDictionary *params = @{@"phone": @"13770801786", @"country": @"中国"};
+        NSString *pn = [self.phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSDictionary *params = @{@"phone": pn, @"country": @"中国"};
         typeof(self) __weak weakSelf = self;
         [BaseNetManager requestWithPost:@"http://12345.abc.tm/uc/mobile/code" parameters:params successBlock:^(NSDictionary *resultObject, int isSuccessed) {
             typeof(weakSelf) __strong strongSelf = weakSelf;
@@ -322,5 +330,42 @@
    });
    dispatch_resume(_timer);
    
+}
+
+#pragma mark - 登录成功后的处理
+- (void)loginSuc:(NSDictionary *)dict{
+        if ([dict[@"code"] integerValue] == 0) {
+            [YLUserInfo getuserInfoWithDic:dict[@"data"]];//存储登录信息
+            NSLog(@"登录信息-------------%@",dict);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+                [keychianTool saveToKeychainWithUserName:_userName withPassword:@""];
+//            });
+            NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:[YLUserInfo shareUserInfo].ID, @"uid",nil];
+            [[ChatSocketManager share] ChatsendMsgWithLength:SOCKETREQUEST_LENGTH withsequenceId:0 withcmd:SUBSCRIBE_GROUP_CHAT withVersion:COMMANDS_VERSION withRequestId: 0 withbody:dic];//订阅聊天
+            NSString *executableFile = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey];//获取项目名称
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:[YLUserInfo shareUserInfo].token forKey:executableFile];
+            [defaults synchronize];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                if (self.enterType==1) {
+                    YLTabBarController *SectionTabbar = [[YLTabBarController alloc] init];
+                    APPLICATION.window.rootViewController = SectionTabbar;
+//                }else{
+//                    if (self.pushOrPresent) {
+//                        [self.navigationController popViewControllerAnimated:YES];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"xinlogin" object:nil];
+//                    }else{
+//                        [self dismissViewControllerAnimated:YES completion:nil];
+//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"xinlogin" object:nil];
+//                    }
+//                }
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [APPLICATION.window makeToast:dict[@"message"] duration:1.5 position:CSToastPositionCenter];
+            });
+        }
+    
 }
 @end

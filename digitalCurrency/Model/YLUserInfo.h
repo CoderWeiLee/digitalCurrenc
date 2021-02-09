@@ -29,10 +29,9 @@
 @property (nonatomic, strong) Location *location;
 @property (nonatomic, copy) NSString *loginCount;
 @property (nonatomic, copy) NSString *secondLevel;
-@property(nonatomic,strong)NSString *city;
-@property(nonatomic,strong)NSString *country;
-@property(nonatomic,strong)NSString *district;
-@property(nonatomic,strong)NSString *province;
+@property (nonatomic, strong) Country *country;
+@property (nonatomic, copy) NSString *thirdLevel;
+@property (nonatomic, copy) NSString *inviter;
 @property(nonatomic,strong)NSString *memberLevel;
 @property(nonatomic,strong)NSString *realName;
 @property(nonatomic,strong)NSString *token;
@@ -41,6 +40,11 @@
 @property(nonatomic,strong)NSString *promotionCode;
 @property(nonatomic,strong)NSString *promotionPrefix;
 @property(nonatomic,strong)NSString *ID;
+@property (nonatomic, assign) BOOL signInActivity;
+@property (nonatomic, copy) NSString *memberRate;
+@property (nonatomic, copy) NSString *superPartner;
+@property (nonatomic, assign) BOOL signInAbility;
+@property (nonatomic, copy) NSString *firstLevel;
 /*  通过初始化userIfo并保存在本地(单利模式)   */
 +(instancetype)getuserInfoWithDic:(NSDictionary *)dic;
 

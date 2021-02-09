@@ -30,10 +30,6 @@ static YLUserInfo *userInfo = nil;
 }
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{@"ID" : @"id",
-             @"city":@"location.city",
-             @"country":@"location.country",
-             @"district":@"location.district",
-             @"province":@"location.province"
              }; 
 }
 /*  获取用户已登陆的信息 */
@@ -79,12 +75,14 @@ static YLUserInfo *userInfo = nil;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
-    
     [aCoder encodeObject:self.levelName forKey:@"levelName"];
-    [aCoder encodeObject:self.city forKey:@"city"];
+    [aCoder encodeObject:self.location forKey:@"location"];
     [aCoder encodeObject:self.country forKey:@"country"];
-    [aCoder encodeObject:self.district forKey:@"district"];
-    [aCoder encodeObject:self.province forKey:@"province"];
+    [aCoder encodeObject:self.loginCount forKey:@"loginCount"];
+    [aCoder encodeObject:self.secondLevel forKey:@"secondLevel"];
+    [aCoder encodeObject:self.country forKey:@"country"];
+    [aCoder encodeObject:self.thirdLevel forKey:@"thirdLevel"];
+    [aCoder encodeObject:self.inviter forKey:@"inviter"];
     [aCoder encodeObject:self.memberLevel forKey:@"memberLevel"];
     [aCoder encodeObject:self.realName forKey:@"realName"];
     [aCoder encodeObject:self.token forKey:@"token"];
@@ -93,15 +91,22 @@ static YLUserInfo *userInfo = nil;
     [aCoder encodeObject:self.promotionCode forKey:@"promotionCode"];
     [aCoder encodeObject:self.promotionPrefix forKey:@"promotionPrefix"];
     [aCoder encodeObject:self.ID forKey:@"ID"];
+    [aCoder encodeBool:self.signInActivity forKey:@"signInActivity"];
+    [aCoder encodeObject:self.memberRate forKey:@"memberRate"];
+    [aCoder encodeObject:self.superPartner forKey:@"superPartner"];
+    [aCoder encodeBool:self.signInAbility forKey:@"signInAbility"];
+    [aCoder encodeObject:self.firstLevel forKey:@"firstLevel"];
 }
 - (id)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super init]) {
-        
         self.levelName = [aDecoder decodeObjectForKey:@"levelName"];
-        self.city = [aDecoder decodeObjectForKey:@"city"];
+        self.location = [aDecoder decodeObjectForKey:@"location"];
         self.country = [aDecoder decodeObjectForKey:@"country"];
-        self.district = [aDecoder decodeObjectForKey:@"district"];
-        self.province = [aDecoder decodeObjectForKey:@"province"];
+        self.loginCount = [aDecoder decodeObjectForKey:@"loginCount"];
+        self.secondLevel = [aDecoder decodeObjectForKey:@"secondLevel"];
+        self.country = [aDecoder decodeObjectForKey:@"country"];
+        self.thirdLevel = [aDecoder decodeObjectForKey:@"thirdLevel"];
+        self.inviter = [aDecoder decodeObjectForKey:@"inviter"];
         self.memberLevel = [aDecoder decodeObjectForKey:@"memberLevel"];
         self.realName = [aDecoder decodeObjectForKey:@"realName"];
         self.token = [aDecoder decodeObjectForKey:@"token"];
@@ -110,6 +115,11 @@ static YLUserInfo *userInfo = nil;
         self.promotionCode = [aDecoder decodeObjectForKey:@"promotionCode"];
         self.promotionPrefix = [aDecoder decodeObjectForKey:@"promotionPrefix"];
         self.ID = [aDecoder decodeObjectForKey:@"ID"];
+        self.signInActivity = [aDecoder decodeObjectForKey:@"signInActivity"];
+        self.memberRate = [aDecoder decodeObjectForKey:@"memberRate"];
+        self.superPartner = [aDecoder decodeObjectForKey:@"superPartner"];
+        self.signInAbility = [aDecoder decodeObjectForKey:@"signInAbility"];
+        self.firstLevel = [aDecoder decodeObjectForKey:@"firstLevel"];
     }
     return self;
 }
